@@ -80,8 +80,6 @@ openFPGALoader -b arty -f black.bit
 The compiler is developed to compile **error** language, which is used to generated machine code for xia architecture. Error language is case-sensitive, so var_a and var_A are different. A single line comment starts with //. White space is a term used to represent the characters for spaces, tabs, newlines and formfeeds,
 
 
-Please take a look of the api.
-
 ### API
 
 
