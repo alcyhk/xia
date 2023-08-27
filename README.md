@@ -77,7 +77,7 @@ openFPGALoader -b arty -f black.bit
 
 ## Tutorial
 
-For all the tutorials, the workflow are the same. The only differences is the <mark>lain.err</mark> file.
+For all the tutorials, the workflow are the same. The only differences is the **lain.err** file.
 
 ### Example: Hello World
 
