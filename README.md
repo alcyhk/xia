@@ -5,7 +5,7 @@
 xia (also known as X inside Architecture) is a family of grid instruction set computer (GISC) instruction set architectures.
 
 ## Overview
-xia is designed to be the barebone of any electronic device. xia_1st is designed to be a smart device which is capable to perform basic touch, display and wireless feature. xia_1st allows developers to connect various modules via FSMC, DDR, TTL, SPI, TWI and GPIO. A workable demo would be performed by a FPGA Chip.
+xia is designed to be the barebone of any electronic device. xia_1st is designed to be a smart device which is capable to perform basic touch, display and wireless feature. xia_1st allows developers to connect various modules via FSMC, DDR, TTL, SPI, TWI and GPIO. A workable demo is performed by the FPGA board arty 35.
 
 ## Demo
 <Video/Gif>
@@ -75,170 +75,17 @@ sudo dd if=blacklain of=/dev/<mmc drive>  bs=1M
 openFPGALoader -b arty -f black.bit
 ```
 
-## Tutorial
+## Error Lang
 
-For all the tutorials, the workflow are the same. The only differences is the **lain.err** file.
-
-### Example: Hello World
-
-```
-print("hello world");
-```
-
-Beginner
-	Example: GPIO
-	Example: Touch
-
-assign(b,0);
-while(1==1){
-	chkNoTouch(a);
-	if(a==b){
-		getTouch(x,y);
-		setc0(x);
-	}
+The compiler is developed to compile **error** language, which is used to generated machine code for xia architecture. Error language is case-sensitive, so var_a and var_A are different. A single line comment starts with //. White space is a term used to represent the characters for spaces, tabs, newlines and formfeeds,
 
 
-}
-	
-		Example: Pointer
+Please take a look of the api.
 
-assign(a,16774146);
-assign(b,30);
-assign(c,55);
-
-pts(a,b);
-ptg(c,a);
-
-setc0(c);
-setc0(a);
-
-		Example: Draw 
-
-assign(xs,0);
-	assign(ys,0);
-	assign(xe,479);
-	assign(ye,799);
-
-	assign(s,xs);
-	assign(e,xe);
-
-		
-	mul(s,65536);
-	add(s,ys);
-
-	arith(e,16,34);
-	//mul(e,65536);
-	add(e,ye);
-
-	drawFill(0,s,e);
-	assign(d,0);
-	while(d < 50){
-	add(d,1);
-	}
-
-
-		Example: Calculation
-
-assign(a,33);
-assign(b,22);
-add(a,b);
-setc0(a);
-
-		Example: Draw Text
-#link<font.err>
-
-fontSetup();
-assign(a,491594);
-assign(b,0);
-drb(a,b);
-
-		Example: Load Data from MMC to Memory
-
-assign(block,0);
-assign(memory,12582912);
-blk2Mem(memory, block);
+### API
 
 
 
-ptg(out,memory);
-setc0(out);
-
-
-
-
-
-
-		Example: Save Data from Memory to MMC
-
-
-
-assign(block,491000);
-assign(memory,12582912);
-assign(out,1);
-pts(memory,out);
-
-
-assign(memory,12582912);
-
-mem2Blk(block, memory);
-
-		
-		Example: function
-		Example: Multiple Files
-		Example: nested if
-		if(A > B){
-setc0(50);
-
-		}else if(A==B){
-setc0(60);
-
-		}
-		Example: nested loop
-assign(a,0);
-assign(b,0);
-while(a<25){
-	while(b<20){
-		setc0(b);
-		add(b,1);
-	}
-	setc0(a);	
-	add(a,1);
-}
-
-
-	Intermediate
-		touch panel to demo gpio, analog, twi, spi, ttl echo and draw
-		CRUD Create Read Update Delete(No Delete to save MMC Lifetime)
-
-		MMC Format
-		1. Code Print 
-		2. Content
-		3. x78000*x200, fonts
-
-		1st Block == pointer to the content
-
-
-		upper typing area
-		lower keyboard
-
-	Advanced 
-		All Purpose OS, Knock
-
-
-
-
-
-
-Error Language Syntax
-Error is case-sensitive, so var_a and var_A are different.
-
-Comments
-
-A single line comment starts with // and tells Verilog compiler to treat everything after this point to the end of the line as a comment.
-
-Whitespace
-
-White space is a term used to represent the characters for spaces, tabs, newlines and formfeeds, and is usually ignored by Verilog except when it separates tokens. In fact, this helps in the indentation of code to make it easier to read.
 
 Keywords
 
@@ -398,6 +245,159 @@ check char from uart rx0
 
 
 Code Example
+
+
+## Tutorial
+
+For all the tutorials, the workflow are the same. The only differences is the **lain.err** file.
+
+### Example: Hello World
+
+```
+print("hello world");
+```
+
+Beginner
+	Example: GPIO
+	Example: Touch
+
+assign(b,0);
+while(1==1){
+	chkNoTouch(a);
+	if(a==b){
+		getTouch(x,y);
+		setc0(x);
+	}
+
+
+}
+	
+		Example: Pointer
+
+assign(a,16774146);
+assign(b,30);
+assign(c,55);
+
+pts(a,b);
+ptg(c,a);
+
+setc0(c);
+setc0(a);
+
+		Example: Draw 
+
+assign(xs,0);
+	assign(ys,0);
+	assign(xe,479);
+	assign(ye,799);
+
+	assign(s,xs);
+	assign(e,xe);
+
+		
+	mul(s,65536);
+	add(s,ys);
+
+	arith(e,16,34);
+	//mul(e,65536);
+	add(e,ye);
+
+	drawFill(0,s,e);
+	assign(d,0);
+	while(d < 50){
+	add(d,1);
+	}
+
+
+		Example: Calculation
+
+assign(a,33);
+assign(b,22);
+add(a,b);
+setc0(a);
+
+		Example: Draw Text
+#link<font.err>
+
+fontSetup();
+assign(a,491594);
+assign(b,0);
+drb(a,b);
+
+		Example: Load Data from MMC to Memory
+
+assign(block,0);
+assign(memory,12582912);
+blk2Mem(memory, block);
+
+
+
+ptg(out,memory);
+setc0(out);
+
+
+
+
+
+
+		Example: Save Data from Memory to MMC
+
+
+
+assign(block,491000);
+assign(memory,12582912);
+assign(out,1);
+pts(memory,out);
+
+
+assign(memory,12582912);
+
+mem2Blk(block, memory);
+
+		
+		Example: function
+		Example: Multiple Files
+		Example: nested if
+		if(A > B){
+setc0(50);
+
+		}else if(A==B){
+setc0(60);
+
+		}
+		Example: nested loop
+assign(a,0);
+assign(b,0);
+while(a<25){
+	while(b<20){
+		setc0(b);
+		add(b,1);
+	}
+	setc0(a);	
+	add(a,1);
+}
+
+
+	Intermediate
+		touch panel to demo gpio, analog, twi, spi, ttl echo and draw
+		CRUD Create Read Update Delete(No Delete to save MMC Lifetime)
+
+		MMC Format
+		1. Code Print 
+		2. Content
+		3. x78000*x200, fonts
+
+		1st Block == pointer to the content
+
+
+		upper typing area
+		lower keyboard
+
+	Advanced 
+		All Purpose OS, Knock
+
+
+
 
 
 
