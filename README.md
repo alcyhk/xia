@@ -59,7 +59,7 @@ sudo make install
 sudo apt install hexedit
 ```
 
-## xia demo
+## Run the demo 
 
 1. Connect the mmc card to your computer via a card reader or something similar.
 2. Then, start the console/terminal and go to "compiler" from the repository.
@@ -77,7 +77,9 @@ openFPGALoader -b arty -f black.bit
 			
 
 
-Tutorial
+## Tutorial
+
+For all the tutorials, the routine are the same as running the demo. The only differences is to edit the lain.err file.
 
 	Hello World
 		sh hack.sh
