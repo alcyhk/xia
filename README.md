@@ -29,7 +29,13 @@ Waveshare MMC Module
 Extension Board Or Direct GPIOs  
 <pic/official link>
 
-USB Cable  
+mmc card reader for computer  
+<pic/official link>
+
+mmc card reader for the FPGA board  
+<pic/official link>
+
+micro USB Cable  
 <pic/official link>
 
 ### SW(Software) Requirements
@@ -53,18 +59,21 @@ sudo make install
 sudo apt install hexedit
 ```
 
-## xia sdk 
-### Usage
+## xia demo
 
+1. Connect the mmc card to your computer via a card reader or something similar.
+2. Then, start the console/terminal and go to "compiler" from the repository.
+3. Compile and upload the image to your mmc card
 ```
-cd compiler
 sh hack.sh
+sudo dd if=blacklain of=/dev/<mmc drive>  bs=1M
 ```
-
-
- 			Git clone 
-			GISC+ Compiler
-			bitstream
+4. Remove and connect the mmc to the arty 35
+5. Connect the micro usb cable to the arty 35 board and your computer.
+6. Load the bitstream to your FPGA board
+```
+openFPGALoader -b arty -f black.bit
+```
 			
 
 
