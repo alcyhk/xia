@@ -11,33 +11,58 @@ xia is designed to be the barebone of any electronic device. xia_1st is designed
 <Video/Gif>
 
 
-##Getting Started
+## Getting Started
 In order to start the demo, you may need to properly setup your working environment beforehand. The extension board is taylormade for the ease of connecting wire. Please feel free to download the cad file and print it yourself. If you are okay to connect the jumper wires, which is about 40 of these, it should work too.
 
-HW(Hardware) Setup
-			Arty 35T
-       <pic/official link>
-			Alientek TFT LCD 4:3 800x480(NT35510+GT9117)
-       <pic/official link>
+## Environment
+
+### HW(Hardware) Requirements
+Arty 35T  
+<pic/official link>
+
+Alientek TFT LCD 4:3 800x480(NT35510+GT9117)  
+<pic/official link>
    
-			Waveshare MMC Module
-       <pic/official link>
+Waveshare MMC Module  
+<pic/official link>
 
-			Extension Board Or Direct GPIOs
-       <pic/official link>
+Extension Board Or Direct GPIOs  
+<pic/official link>
 
-			USB Cable 
-      <pic/official link>
+USB Cable  
+<pic/official link>
 
-Environment Setup
-		OS Setup
-			Linux,Windows,Mac
-			gcc
-			OpenFPGA Loader
-			hexfiend Mac or hexedit(optional)
-   
-		SW Setup
-			Git clone 
+### SW(Software) Requirements
+
+Ubuntu
+```
+# gcc
+sudo apt install gcc
+
+# openfpgaloader
+sudo apt-get install libftdi1-2 libftdi1-dev libhidapi-hidraw0 libhidapi-dev libudev-dev zlib1g-dev cmake pkg-config make g++
+git clone https://github.com/trabucayre/openFPGALoader.git
+cd openFPGALoader
+mkdir build
+cd build
+cmake ../ 
+cmake --build . -j$(nproc)
+sudo make install
+
+# hexedit
+sudo apt install hexedit
+```
+
+## xia sdk 
+### Usage
+
+```
+cd compiler
+sh hack.sh
+```
+
+
+ 			Git clone 
 			GISC+ Compiler
 			bitstream
 			
