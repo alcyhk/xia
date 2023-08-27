@@ -74,22 +74,20 @@ sudo dd if=blacklain of=/dev/<mmc drive>  bs=1M
 ```
 openFPGALoader -b arty -f black.bit
 ```
-			
-
 
 ## Tutorial
 
-For all the tutorials, the routine are the same as running the demo. The only differences is to edit the lain.err file.
+For all the tutorials, the workflow are the same. The only differences is the <mark>lain.err</mark> file.
 
-	Hello World
-		sh hack.sh
-		lain.err
-		print("hello world");
+### Example: Hello World
 
-	Beginner
-		Example: GPIO
+```
+print("hello world");
+```
 
-		Example: Touch
+Beginner
+	Example: GPIO
+	Example: Touch
 
 assign(b,0);
 while(1==1){
