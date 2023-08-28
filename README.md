@@ -93,30 +93,86 @@ To include another header file, a pound sign, a keyword "link" and the header fi
 ### API
 Here comes the pre-built functions for users.
 
-**chkc0(variable)**: //check if the input character is empty
+**chkc0(variable)**: //check the input character from uart rx0 and return the rx0 status to v
 ```
 //v would be either 1 or 0
 chkc0(v);  
 ```
 
-setc0
-getc0
-assign
+**setc0(variable)**: //print the variable v to uart tx0
+```
+//Based on Ascii table, The output character would be 'A' if the variable v is 65 as a decimal.
+setc0(v)
+```
+
+**getc0(variable)**: //get the input character from uart rx0, and set the variable to v
+```
+//Based on Ascii table, The variable would be 'A' if the input character is 65 as a decimal.
+getc0(v)
+```
+
+**assign**: //assign variable b or number to variable a
+```
+assign(a,b);
+assign(a,3);
+```
+
+
 if 
 else
+else if
 while
 
-arith
-add
-sub
-mul
-div
-mod
+**arith**: //define the operator with c, then assign the result from a and b to a 
+```
+arith(a,b,c);
+```
+
+**add**: //adding two numbers and set the result to a
+```
+add(a,b);
+add(a,3);
+```
+
+**sub**: //subtracting two numbers and set the result to a
+```
+sub(a,b);
+sub(a,3);
+```
+
+**mul**: //multiplying two numbers and set the result to a
+```
+mul(a,b);
+mul(a,3);
+```
+
+**div**: //dividing two numbers and set the result to a
+```
+div(a,b);
+div(a,3);
+```
+
+**mod**: //mod two numbers and set the result to a
+```
+mod(a,b);
+mod(a,3);
+```
+
 function
 end
 
-drawBlk
-chkNoTouch
+**drawBlk**: //draw block (block mmc pos, ram start position, ram end position)
+```
+drawblk(a,b,c);
+```
+
+
+**chkNoTouch**: //check if touch event exists, set the variable to the returned value, 
+1 == untouched, 0 == touched
+```
+chkNoTouch(v)
+```
+
 getTouch
 
 setx0
@@ -157,49 +213,17 @@ one line description then example
 
 API
 
-Method
-	chkc0(a);
-Description	
-check char from uart rx0 
-		return the rx0 status to a
-
-	setc0(a);
-		print a to uart tx0
-		accept ascii decimal number 
-	"getc0",//2	1p x
-		get char from uart rx0
-		save the result in the variable
-	"assign",//3  2p x
-		assign variable b or number to variable a
-
-	if, else, else if
-
-	while ()
-
-	arith(a,b,c);
-		define the operator with c
-		a op b then assign to a 
-
-	"add",//10	2p x
-	"sub",//11	2p x
-	"mul",//12	2p x
-	"div",//13	2p x
-	"mod",//14	2p x
-	
 	
 	"function",//17
 		function name
 	"end",//18
 
-	"callFunc",//19
-		call function
 
 
 
 	"drawBlk",//20 3p var, pos
 
 	"chkNoTouch",//21 1p 
-		check if touch event exists, assign the return value to the variable, 1 if no touch, 0 if touched
 
 	"getTouch",//22 2p
 		get the coordinate if there is touch
