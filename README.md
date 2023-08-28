@@ -178,9 +178,13 @@ chkNoTouch(v)
 getTouch(a,b);
 ```
 
-setx0
-drawFill
-drb
+**drawFill**: //fill screen with color. a indicates color code. b indicates starting pixel. c indicates ending pixel.
+```
+drawFill(a,b,c);
+```
+
+**drb**: //load specific block from the mmc card and load to the screen
+
 gpioSet
 gpioGet
 anaSet
