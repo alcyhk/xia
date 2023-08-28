@@ -173,7 +173,10 @@ drawblk(a,b,c);
 chkNoTouch(v)
 ```
 
-getTouch
+getTouch**: //get the coordinate if a touch is detected. Then, set a to x and set b to y
+```
+getTouch(a,b);
+```
 
 setx0
 drawFill
