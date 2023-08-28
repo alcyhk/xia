@@ -11,7 +11,7 @@ xia is designed to be the barebone of any electronic device. xia_1st is designed
 <Video/Gif>
 
 
-## Getting Started
+## Preface
 In order to start the demo, you may need to properly setup your working environment beforehand. The extension board is taylormade for the ease of connecting wire. Please feel free to download the cad file and print it yourself. If you are okay to connect the jumper wires, which is about 40 of these, it should work too.
 
 ## Environment
@@ -77,17 +77,28 @@ openFPGALoader -b arty -f black.bit
 
 ## Error Lang
 
-The compiler is developed to compile **error** language, which is used to generated machine code for xia architecture. Error language is case-sensitive, so var_a and var_A are different. A single line comment starts with //. White space is a term used to represent the characters for spaces, tabs, newlines and formfeeds,
+The compiler included is developed to compile **error** language, which is used to generated machine code for xia architecture. **Error** is designed to be a C-Like language. It's sufficient to create basic led on/off or even a full-suite operating system. **Error** is case-sensitive, so var_a and var_A are different. A single line comment starts with "//".
 
+### Getting Started
 
+### Filename extension 
+Every file in **error** language should end with err.  
+ex. filename.err  
+
+### Include header file
+To include another header file, a pound sign, a keyword "link" and the header file within a pair of angle brackets is needed.  
+```
+#link <header.err>  
+```
 ### API
+Here comes the pre-built functions for users.
 
+**chkc0(variable)**: //check if the input character is empty
+```
+//v would be either 1 or 0
+chkc0(v);  
+```
 
-
-
-Keywords
-
-chkc0
 setc0
 getc0
 assign
