@@ -93,22 +93,22 @@ To include another header file, a pound sign, a keyword "link" and the header fi
 ### API
 Here comes the pre-built functions for users.
 
-**chkc0(variable)**: //check the input character from uart rx0 and return the rx0 status to v
+**chkc(variable,index)**: //check the input character from uart rx<index> and return the rx<index> status to v
 ```
 //v would be either 1 or 0
-chkc0(v);  
+chkc(v,0); 
 ```
 
-**setc0(variable)**: //print the variable v to uart tx0
+**setc(variable,index)**: //print the variable v to uart tx<index>
 ```
 //Based on Ascii table, The output character would be 'A' if the variable v is 65 as a decimal.
-setc0(v)
+setc(v,0); 
 ```
 
-**getc0(variable)**: //get the input character from uart rx0, and set the variable to v
+**getc(variable,index)**: //get the input character from uart rx<index>, and set the variable to v
 ```
 //Based on Ascii table, The variable would be 'A' if the input character is 65 as a decimal.
-getc0(v)
+getc(v,0);
 ```
 
 **assign**: //assign variable b or number to variable a
