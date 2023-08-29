@@ -242,11 +242,11 @@ mem2Blk(a,b);
 assignNum(a,2b,1);
 ```
 
-,"chkc"//36 2p var uart no.
-,"setc"//37  2p x
-,"getc"//38	2p x
+**spiSet**: //Set the target SPI pin b to the variable a.
+```
+spiSet(a,b);
+```
 
-,"spiSet"//39 2p var SPI no.
 ,"spiGet"//40 2p var spi no.
 ,"chkSpi"//41 1p var spi no.
 
