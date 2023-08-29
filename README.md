@@ -161,7 +161,7 @@ mod(a,3);
 function
 end
 
-**drawBlk**: //draw block (block mmc pos, ram start position, ram end position)
+**drawBlk**: //draw block (mmc block position, ram start position, ram end position)
 ```
 drawblk(a,b,c);
 ```
@@ -183,7 +183,7 @@ getTouch(a,b);
 drawFill(a,b,c);
 ```
 
-**drb**: //load specific block from the mmc card b and draw to the screen based on position a
+**drb**: //load specific block from the mmc b and draw to the screen based on position a
 ```
 drb(a,b);
 ```
@@ -207,27 +207,40 @@ gpioGet(v);
 **anaSet**: //Set the target analog pin to the desired output from 0 to 255.
 ```
 //255 == max, 0 == min
-```
 anaSet(0,255);
 anaSet(v,255);
-```
-
 ```
 
 **anaGet**: //Get the current input of the target analog pin and save it to v
 ```
 anaGet(v,index);
 anaGet(v,21);
-
 ```
 
-"arith"//30	3p 
-,"pts"//31	2p 
-,"ptg"//32	2p 
+**pts**: //Set the pointer a to b
+```
+pts(a,b);
+```
 
-,"blk2Mem"//33	2p read opval1 block to opval0 ddr
-,"mem2Blk"//34	2p write opval1 ddr to opval0 block
-,"assignNum"//35  3p x
+**ptg**: //Get the pointer b and set a to it
+```
+ptg(a,b);
+```
+
+**blk2Mem**: //Read Block from the mmc b and write it to the ddr memory a
+```
+blk2Mem(a,b);
+```
+
+**mem2Blk**: //Read Block from the ddr memory b and write it to the mmc a
+```
+mem2Blk(a,b);
+```
+
+**assignNum**: //Assign number b to the variable a based on its base type c: 0 == decimal, 1 == hex, 2 == octal
+```
+assignNum(a,2b,1);
+```
 
 ,"chkc"//36 2p var uart no.
 ,"setc"//37  2p x
