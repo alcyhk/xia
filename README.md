@@ -182,8 +182,7 @@ drb(a,b);
 
 **gpioSet**: //Set the target gpio to on or off
 ```
-//1 == on, 0 == off
-gpioSet(1);
+//0 == all off, 136 == 0b10001000 means to turn off all gpios except the fourth and the eighth one.
 gpioSet(0);
 gpioSet(v);
 ```
@@ -192,7 +191,6 @@ gpioSet(v);
 
 **gpioGet**: //Get the value of the target gpio and set v to it
 ```
-//1 == on, 0 == off
 gpioGet(v);
 ```
 
@@ -331,6 +329,9 @@ print("hello world");
 
 
 ### Example: GPIO
+```
+gpioSet(0);
+```
 
 ### Example: Touch
 ```
