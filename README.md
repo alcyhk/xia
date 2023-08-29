@@ -118,11 +118,6 @@ assign(a,3);
 ```
 
 
-if 
-else
-else if
-while
-
 **arith**: //define the operator with c, then assign the result from a and b to a 
 ```
 arith(a,b,c);
@@ -158,10 +153,7 @@ mod(a,b);
 mod(a,3);
 ```
 
-function
-end
-
-**drawBlk**: //draw block (mmc block position, ram start position, ram end position)
+**drawBlk**: //load data from the mmc block with position a.Then, draw it to screen with starting pixel a and ending pixel b.
 ```
 drawblk(a,b,c);
 ```
@@ -198,7 +190,7 @@ gpioSet(v);
 
 
 
-**gpioGet**: //Get the status of the target gpio and set v to it
+**gpioGet**: //Get the value of the target gpio and set v to it
 ```
 //1 == on, 0 == off
 gpioGet(v);
@@ -242,91 +234,84 @@ mem2Blk(a,b);
 assignNum(a,2b,1);
 ```
 
-**spiSet**: //Set the target SPI pin b to the variable a.
+**spiSet**: //Set the SPI output pin b to the variable a.
 ```
 spiSet(a,b);
 ```
 
-,"spiGet"//40 2p var spi no.
-,"chkSpi"//41 1p var spi no.
+**spiGet**: //Get the value of the SPI input pin and set b to it
+```
+spiGet(a,b);
+```
 
-,"twiSet"//42 2p var SPI no.
-,"twiGet"//43 2p var spi no.
-,"chkTwi"//44 1p var spi no.
-,"if}"//45 if}
-,"blk2Draw"//46 blk2Draw
-,"drawMem"//47 drawMem
-,"ldb"//48 2p
+**chkSpi(variable)**: //check if the input queue from spi is empty
+```
+//1 == existed, 0 == empty
+chkSpi(v); 
+```
+
+**twiSet**: //Set the TWI output pin b to the variable a.
+```
+twiSet(a,b);
+```
+
+**twiGet**: //Get the value of the TWI input pin and set b to it
+```
+spiGet(a,b);
+```
+
+**chkTwi(variable)**: //check if the input queue from twi is empty
+```
+//1 == existed, 0 == empty
+chkTwi(v); 
+```
+
+**blk2Draw**: //load data from the mmc block with position b and draw it to screen with starting pixel a
+```
+blk2Draw(a,b);
+```
+
+**drawMem**: //load data from the memory with position b and draw it to screen with starting pixel a
+```
+drawMem(a,b);
+```
+
+### Keywords
 
 
+**if**: //start the "if" condition 
+```
+if(a==0){
+}
+```
 
+**else**: //branch for the "if" condition
+```
+if(a==0){
+}else{
+}
+```
 
-one line description then example
+**else if**://branch for the "if" condition with another condition
+```
+if(a==0){
+}else if(a==1){
+}
+```
 
-API
+**while**: //start the "while" loop
+```
+while(a>0){
+}
+```
 
-	
-	"function",//17
-		function name
-	"end",//18
-
-
-
-
-	"drawBlk",//20 3p var, pos
-
-	"chkNoTouch",//21 1p 
-
-	"getTouch",//22 2p
-		get the coordinate if there is touch
-	"setx0",//23 1p
-
-	"drawFill",//24 3p color, pos
-	"drb",//25 2p
-		load specific block from mmc and display to lcd
-	"gpioSet",//26 1p
-		accept hex or variable
-		set gpio in 32 bit hex, 
-		ex. gpio 0,2,4,6 on (05)
-	"gpioGet",//27 1p
-		get gpio in 32 bit hex
-		ex. return (0a) if gpios 1,3,5,7 are on
-
-	"anaSet",//28 2p 
-		analog Set
-		set analog a in power b
-	"anaGet",//29 2p
-		analog get
-		get analog a and assign the power to variable b
-
-	"arith"//30	3p 
-
-	,"pts"//31	2p 
-		set pointer a to variable b
-	,"ptg"//32	2p 
-		get pointer a and set to variable b
-
-	,"blk2Mem"//33	2p read opval1 block to opval0 ddr
-		load block b to ddr a
-	,"mem2Blk"//34	2p write opval1 ddr to opval0 block
-		save ddr b to block a
-	,"assignNum"//35  3p x
-
-	,"spiSet"//39 2p var SPI no.
-		spi Set
-		set spi a in number b
-	,"spiGet"//40 2p var spi no.
-		spi Get
-		get spi a in number b
-	,"chkSpi"//41 1p var spi no.
-		check if spi empty
-	,"twiSet"//42 2p var TWI no.
-		set twi a in number b
-
-	,"twiGet"//43 2p var spi no.
-		get twi a in number b
-
-	,"chktwi"//44 1p var spi no.
+**func**: //function begin
+**end**: //function end
+```
+func testFunc();
+	chkc(v,0);
+end();
+```
 
 
 Code Example
