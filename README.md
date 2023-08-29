@@ -183,35 +183,67 @@ getTouch(a,b);
 drawFill(a,b,c);
 ```
 
-**drb**: //load specific block from the mmc card and load to the screen
+**drb**: //load specific block from the mmc card b and draw to the screen based on position a
+```
+drb(a,b);
+```
 
-gpioSet
-gpioGet
-anaSet
-anaGet
+**gpioSet**: //Set the target gpio to on or off
+```
+//1 == on, 0 == off
+gpioSet(1);
+gpioSet(0);
+gpioSet(v);
+```
 
-arith 
-pts
-ptg
 
-blk2Mem
-mem2Blk
-assignNum
 
-chkc
-setc
-getc
+**gpioGet**: //Get the status of the target gpio and set v to it
+```
+//1 == on, 0 == off
+gpioGet(v);
+```
 
-spiSet
-spiGet
-chkSpi
+**anaSet**: //Set the target analog pin to the desired output from 0 to 255.
+```
+//255 == max, 0 == min
+```
+anaSet(0,255);
+anaSet(v,255);
+```
 
-twiSet
-twiGet
-chktwi
+```
 
-blk2Draw
-drawMem
+**anaGet**: //Get the current input of the target analog pin and save it to v
+```
+anaGet(v,index);
+anaGet(v,21);
+
+```
+
+"arith"//30	3p 
+,"pts"//31	2p 
+,"ptg"//32	2p 
+
+,"blk2Mem"//33	2p read opval1 block to opval0 ddr
+,"mem2Blk"//34	2p write opval1 ddr to opval0 block
+,"assignNum"//35  3p x
+
+,"chkc"//36 2p var uart no.
+,"setc"//37  2p x
+,"getc"//38	2p x
+
+,"spiSet"//39 2p var SPI no.
+,"spiGet"//40 2p var spi no.
+,"chkSpi"//41 1p var spi no.
+
+,"twiSet"//42 2p var SPI no.
+,"twiGet"//43 2p var spi no.
+,"chkTwi"//44 1p var spi no.
+,"if}"//45 if}
+,"blk2Draw"//46 blk2Draw
+,"drawMem"//47 drawMem
+,"ldb"//48 2p
 
 
 
