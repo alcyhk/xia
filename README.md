@@ -66,7 +66,7 @@ sudo apt install hexedit
 3. Compile and upload the image to your mmc card
 ```
 sh hack.sh
-sudo dd if=blacklain of=/dev/<mmc drive>  bs=1M
+sudo dd if=darklain of=/dev/<mmc drive>  bs=1M
 ```
 4. Remove and connect the mmc to the arty 35
 5. Connect the micro usb cable to the arty 35 board and your computer.
