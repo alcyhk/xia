@@ -75,10 +75,6 @@ sudo dd if=darklain of=/dev/<mmc drive>  bs=1M
 openFPGALoader -b arty -f black.bit
 ```
 
-## Error Lang
-
-The compiler included is developed to compile **error** language, which is used to generated machine code for xia virtual machine. **Error** is designed to be a C-Like language. It's sufficient to create basic led on/off or even a full-suite operating system. **Error** is case-sensitive, so var_a and var_A are different. A single line comment starts with "//".
-
 ## Code for virtual machine
 
 The virtual machine on top of GISC recognized the following codes.
@@ -95,6 +91,18 @@ The virtual machine on top of GISC recognized the following codes.
 | OP_PTG  |6| Pointer Get | Get Pointer opval1 and Set opval0 to its value |
 | OP_B2M  |7| Block to Memory | Get the block from the mmc and load it to the ddr memory |
 | OP_M2B  |7| Memory to Block | Get the block from the ddr memory and write it to the mmc |
+
+The syntax of the code would be like this.
+
+| operation | value 0 | value 1 |
+| :--:|:-:|:-:|
+| opcode  | opval0 | opval1 |
+
+
+## Error Lang
+
+The compiler included is developed to compile **error** language, which is used to generated machine code for xia virtual machine. **Error** is designed to be a C-Like language. It's sufficient to create basic led on/off or even a full-suite operating system. **Error** is case-sensitive, so var_a and var_A are different. A single line comment starts with "//".
+
 
 ### Getting Started
 
