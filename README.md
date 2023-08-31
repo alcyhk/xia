@@ -96,8 +96,6 @@ The virtual machine on top of GISC recognized the following codes.
 | OP_B2M  |7| Block to Memory | Get the block from the mmc and load it to the ddr memory |
 | OP_M2B  |7| Memory to Block | Get the block from the ddr memory and write it to the mmc |
 
-Syntax: <code> <opval0> <opval1>
-
 ### Getting Started
 
 ### Filename extension 
