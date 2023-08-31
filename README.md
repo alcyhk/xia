@@ -77,7 +77,26 @@ openFPGALoader -b arty -f black.bit
 
 ## Error Lang
 
-The compiler included is developed to compile **error** language, which is used to generated machine code for xia architecture. **Error** is designed to be a C-Like language. It's sufficient to create basic led on/off or even a full-suite operating system. **Error** is case-sensitive, so var_a and var_A are different. A single line comment starts with "//".
+The compiler included is developed to compile **error** language, which is used to generated machine code for xia virtual machine. **Error** is designed to be a C-Like language. It's sufficient to create basic led on/off or even a full-suite operating system. **Error** is case-sensitive, so var_a and var_A are different. A single line comment starts with "//".
+
+## Code for virtual machine
+
+The virtual machine on top of GISC recognized the following codes.
+
+
+| Code | Hex | Meaning | Description |
+| :--:|:-:|:-:|:-:|
+| OP_DMY  |0| Dummy | Do nothing |
+| OP_ASN  |1| Assign | Assign value from opval1 to opval0 |
+| OP_CPY  |2| Copy | Copy value from opval1 to opval0 |
+| OP_GO   |3| Go | Jump to preset Address |
+| OP_TAG  |4| Tag | Load pre-built function from the cache |
+| OP_PTS  |5| Pointer Set | Set Pointer opval0 to opval1 |
+| OP_PTG  |6| Pointer Get | Get Pointer opval1 and Set opval0 to its value |
+| OP_B2M  |7| Block to Memory | Get the block from the mmc and load it to the ddr memory |
+| OP_M2B  |7| Memory to Block | Get the block from the ddr memory and write it to the mmc |
+
+Syntax: <code> <opval0> <opval1>
 
 ### Getting Started
 
