@@ -80,7 +80,7 @@ openFPGALoader -b arty -f black.bit
 The virtual machine on top of GISC recognized the following codes.
 
 
-| Code | Hex | Meaning | Description |
+| Opcode | Hex | Meaning | Description |
 | :--:|:-:|:-:|:-:|
 | OP_DMY  |0| Dummy | Do nothing |
 | OP_ASN  |1| Assign | Assign value from opval1 to opval0 |
