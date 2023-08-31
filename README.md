@@ -74,10 +74,18 @@ sudo dd if=darklain of=/dev/<mmc drive>  bs=1M
 ```
 openFPGALoader -b arty -f black.bit
 ```
+8. Compile bootloader
+```
+cd bootloader
+sh hack.sh
+```
+9. Memory initialize with the generated file bram.coe.
+(Please refer to <a href="https://docs.xilinx.com/v/u/en-US/pg058-blk-mem-gen">Block Memory Generator Guide</a> from the official website of Xilinx)
 
-## Code for virtual machine
 
-The virtual machine on top of GISC recognized the following codes.
+## Code for bootloader
+
+The bootloader on top of GISC recognized the following codes.
 
 
 | Opcode | Hex | Meaning | Description |
@@ -101,7 +109,7 @@ The syntax of the code would be like this.
 
 ## Error Lang
 
-The compiler included is developed to compile **error** language, which is used to generated machine code for xia virtual machine. **Error** is designed to be a C-Like language. It's sufficient to create basic led on/off or even a full-suite operating system. **Error** is case-sensitive, so var_a and var_A are different. A single line comment starts with "//".
+The compiler included is developed to compile **error** language, which is used to generated machine code for xia bootloader. **Error** is designed to be a C-Like language. It's sufficient to create basic led on/off or even a full-suite operating system. **Error** is case-sensitive, so var_a and var_A are different. A single line comment starts with "//".
 
 
 ### Getting Started
