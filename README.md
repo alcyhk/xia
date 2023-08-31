@@ -5,7 +5,7 @@
 xia (also known as X inside Architecture) is a family of grid instruction set computer (GISC) instruction set architectures.
 
 ## Overview
-xia is designed to be the barebone of any electronic device. xia_1st is designed to be a smart device which is capable to perform basic touch, display and wireless feature. xia_1st allows developers to connect various modules via FSMC, DDR, TTL, SPI, TWI and GPIO. A workable demo is performed by the FPGA board arty 35.
+xia is designed to be the barebone of any quantum device. xia_1st is designed to be a workable architecture which allows users to perform basic touch, display and wireless feature. xia_1st allows developers to connect various modules via FSMC, DDR, TTL, SPI, TWI and GPIO. A workable demo is performed by the FPGA board arty 35.
 
 ## Demo
 <Video/Gif>
