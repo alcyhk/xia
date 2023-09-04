@@ -85,11 +85,19 @@ sh hack.sh
 9. Memory initialize with the generated file bram.coe.
 (Please refer to <a href="https://docs.xilinx.com/v/u/en-US/pg058-blk-mem-gen">Block Memory Generator Guide</a> from the official website of Xilinx)
 
+## GISC
+GISC contains 4 core opcodes which are op_set, op_cpy, op_phy and op_jmp.
+
+| Opcode | Hex | Meaning | Description |
+| :--:|:-:|:-:|:-:|
+| OP_SET  |0| Set | Set value opval0 to opval1  |
+| OP_CPY  |1| Copy | Copy value from opval1(Internal Matrix) to opval0 |
+| OP_PHY  |2| Phys Interface | Copy value from opval1(Phys Interface) to opval0 |
+| OP_JMP  |3| Jump | Jump to preset Address |
 
 ## Code for bootloader
 
-The bootloader on top of GISC recognized the following codes.
-
+In order to speed thing up by the internal matrix(similar to cache), the bootloader is created and acted like a virtual machine which packed up the often used clustering opcodes to one function. The bootloader recognized the following codes.
 
 | Opcode | Hex | Meaning | Description |
 | :--:|:-:|:-:|:-:|
