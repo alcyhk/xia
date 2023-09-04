@@ -62,7 +62,10 @@ sudo apt install hexedit
 ## Run the demo 
 
 1. Connect the mmc card to your computer via a card reader or something similar.
-2. Then, start the console/terminal and go to "compiler" from the repository.
+2. Then, start the console/terminal and go to "sdk/compiler" from the repository.
+```
+cd sdk/compiler
+```
 3. Compile and upload the image to your mmc card
 ```
 sh hack.sh
@@ -76,7 +79,7 @@ openFPGALoader -b arty -f black.bit
 ```
 8. Compile bootloader
 ```
-cd bootloader
+cd sdk/bootloader
 sh hack.sh
 ```
 9. Memory initialize with the generated file bram.coe.
