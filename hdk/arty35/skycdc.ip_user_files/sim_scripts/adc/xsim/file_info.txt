@@ -1,0 +1,2 @@
+adc.v,verilog,xil_defaultlib,../../../../skycdc.gen/sources_1/ip/adc/adc.v,
+glbl.v,Verilog,xil_defaultlib,glbl.v
