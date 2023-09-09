@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="top_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="top_tb" />
+            <top_module name="vcomponents" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="2,965.000001 us"></ZoomEndTime>
+      <Cursor1Time time="235.000000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="266"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="162" />
+   <wvobject type="logic" fp_name="/top_tb/top_inst/TimeStampGen_inst/DDR_Gen_inst/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/TimeStampGen_inst/DDR_Gen_inst/DDR700us_Start">
+      <obj_property name="ElementShortName">DDR700us_Start</obj_property>
+      <obj_property name="ObjectShortName">DDR700us_Start</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/TimeStampGen_inst/DDR_Gen_inst/itr700Clk0">
+      <obj_property name="ElementShortName">itr700Clk0</obj_property>
+      <obj_property name="ObjectShortName">itr700Clk0</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/TimeStampGen_inst/DDR_Gen_inst/itr700Clk1">
+      <obj_property name="ElementShortName">itr700Clk1</obj_property>
+      <obj_property name="ObjectShortName">itr700Clk1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/TimeStampGen_inst/DDR_Gen_inst/itr700Clk2">
+      <obj_property name="ElementShortName">itr700Clk2</obj_property>
+      <obj_property name="ObjectShortName">itr700Clk2</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/TimeStampGen_inst/DDR_Gen_inst/itr700Clk3">
+      <obj_property name="ElementShortName">itr700Clk3</obj_property>
+      <obj_property name="ObjectShortName">itr700Clk3</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/TimeStampGen_inst/DDR_Gen_inst/itr700Clk4">
+      <obj_property name="ElementShortName">itr700Clk4</obj_property>
+      <obj_property name="ObjectShortName">itr700Clk4</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/TimeStampGen_inst/DDR_Gen_inst/itr700Clk5">
+      <obj_property name="ElementShortName">itr700Clk5</obj_property>
+      <obj_property name="ObjectShortName">itr700Clk5</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/TimeStampGen_inst/DDR_Gen_inst/unlatch">
+      <obj_property name="ElementShortName">unlatch</obj_property>
+      <obj_property name="ObjectShortName">unlatch</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/C">
+      <obj_property name="ElementShortName">C</obj_property>
+      <obj_property name="ObjectShortName">C</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/MOSI">
+      <obj_property name="ElementShortName">MOSI</obj_property>
+      <obj_property name="ObjectShortName">MOSI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/MISO">
+      <obj_property name="ElementShortName">MISO</obj_property>
+      <obj_property name="ObjectShortName">MISO</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/S">
+      <obj_property name="ElementShortName">S</obj_property>
+      <obj_property name="ObjectShortName">S</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ROUTE_TS_84">
+      <obj_property name="ElementShortName">ROUTE_TS_84</obj_property>
+      <obj_property name="ObjectShortName">ROUTE_TS_84</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_act_rwi">
+      <obj_property name="ElementShortName">grid_mmc_act_rwi[1:0]</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_act_rwi[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_fifo_read_once">
+      <obj_property name="ElementShortName">grid_mmc_fifo_read_once</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_fifo_read_once</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_fifo_write_once">
+      <obj_property name="ElementShortName">grid_mmc_fifo_write_once</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_fifo_write_once</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_addr">
+      <obj_property name="ElementShortName">grid_mmc_addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_data_read">
+      <obj_property name="ElementShortName">grid_mmc_data_read[31:0]</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_data_read[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_data_write">
+      <obj_property name="ElementShortName">grid_mmc_data_write[31:0]</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_data_write[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_fifow_full">
+      <obj_property name="ElementShortName">grid_mmc_fifow_full</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_fifow_full</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_fifow_empty">
+      <obj_property name="ElementShortName">grid_mmc_fifow_empty</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_fifow_empty</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_fifor_full">
+      <obj_property name="ElementShortName">grid_mmc_fifor_full</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_fifor_full</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_fifor_empty">
+      <obj_property name="ElementShortName">grid_mmc_fifor_empty</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_fifor_empty</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_act_idle">
+      <obj_property name="ElementShortName">grid_mmc_act_idle</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_act_idle</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/dummyCheck">
+      <obj_property name="ElementShortName">dummyCheck</obj_property>
+      <obj_property name="ObjectShortName">dummyCheck</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ila_probe0">
+      <obj_property name="ElementShortName">ila_probe0[1:0]</obj_property>
+      <obj_property name="ObjectShortName">ila_probe0[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ila_probe1">
+      <obj_property name="ElementShortName">ila_probe1</obj_property>
+      <obj_property name="ObjectShortName">ila_probe1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ila_probe2">
+      <obj_property name="ElementShortName">ila_probe2</obj_property>
+      <obj_property name="ObjectShortName">ila_probe2</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ila_probe3">
+      <obj_property name="ElementShortName">ila_probe3</obj_property>
+      <obj_property name="ObjectShortName">ila_probe3</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ila_probe4">
+      <obj_property name="ElementShortName">ila_probe4[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ila_probe4[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ila_probe5">
+      <obj_property name="ElementShortName">ila_probe5[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ila_probe5[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ila_probe6">
+      <obj_property name="ElementShortName">ila_probe6[3:0]</obj_property>
+      <obj_property name="ObjectShortName">ila_probe6[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ila_probe7">
+      <obj_property name="ElementShortName">ila_probe7[9:0]</obj_property>
+      <obj_property name="ObjectShortName">ila_probe7[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ila_probe8">
+      <obj_property name="ElementShortName">ila_probe8[3:0]</obj_property>
+      <obj_property name="ObjectShortName">ila_probe8[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/req_mmc_idle">
+      <obj_property name="ElementShortName">req_mmc_idle</obj_property>
+      <obj_property name="ObjectShortName">req_mmc_idle</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/ack_mmc_idle">
+      <obj_property name="ElementShortName">ack_mmc_idle</obj_property>
+      <obj_property name="ObjectShortName">ack_mmc_idle</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_fifo_read_once_r">
+      <obj_property name="ElementShortName">grid_mmc_fifo_read_once_r</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_fifo_read_once_r</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_fifo_write_once_r">
+      <obj_property name="ElementShortName">grid_mmc_fifo_write_once_r</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_fifo_write_once_r</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_act_rwi_r">
+      <obj_property name="ElementShortName">grid_mmc_act_rwi_r[1:0]</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_act_rwi_r[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_addr_r">
+      <obj_property name="ElementShortName">grid_mmc_addr_r[31:0]</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_addr_r[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_data_read_r">
+      <obj_property name="ElementShortName">grid_mmc_data_read_r[31:0]</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_data_read_r[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/grid_mmc_data_write_r">
+      <obj_property name="ElementShortName">grid_mmc_data_write_r[31:0]</obj_property>
+      <obj_property name="ObjectShortName">grid_mmc_data_write_r[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/MMC_FIFO_WRITE_COUNT">
+      <obj_property name="ElementShortName">MMC_FIFO_WRITE_COUNT[3:0]</obj_property>
+      <obj_property name="ObjectShortName">MMC_FIFO_WRITE_COUNT[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/MMC_FIFO_READ_COUNT">
+      <obj_property name="ElementShortName">MMC_FIFO_READ_COUNT[3:0]</obj_property>
+      <obj_property name="ObjectShortName">MMC_FIFO_READ_COUNT[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/fifo_get_full">
+      <obj_property name="ElementShortName">fifo_get_full</obj_property>
+      <obj_property name="ObjectShortName">fifo_get_full</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/fifo_get_empty">
+      <obj_property name="ElementShortName">fifo_get_empty</obj_property>
+      <obj_property name="ObjectShortName">fifo_get_empty</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/getData512Fifo">
+      <obj_property name="ElementShortName">getData512Fifo[7:0]</obj_property>
+      <obj_property name="ObjectShortName">getData512Fifo[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/fifo_get_wr">
+      <obj_property name="ElementShortName">fifo_get_wr</obj_property>
+      <obj_property name="ObjectShortName">fifo_get_wr</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/fifo_get_rd">
+      <obj_property name="ElementShortName">fifo_get_rd</obj_property>
+      <obj_property name="ObjectShortName">fifo_get_rd</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/getData512Grid">
+      <obj_property name="ElementShortName">getData512Grid[7:0]</obj_property>
+      <obj_property name="ObjectShortName">getData512Grid[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagRead">
+      <obj_property name="ElementShortName">flagRead</obj_property>
+      <obj_property name="ObjectShortName">flagRead</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/MOSI_R">
+      <obj_property name="ElementShortName">MOSI_R</obj_property>
+      <obj_property name="ObjectShortName">MOSI_R</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/SCK_R">
+      <obj_property name="ElementShortName">SCK_R</obj_property>
+      <obj_property name="ObjectShortName">SCK_R</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/qspi_state">
+      <obj_property name="ElementShortName">qspi_state[1:0]</obj_property>
+      <obj_property name="ObjectShortName">qspi_state[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/qspi_bit_count">
+      <obj_property name="ElementShortName">qspi_bit_count[3:0]</obj_property>
+      <obj_property name="ObjectShortName">qspi_bit_count[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/S_SET">
+      <obj_property name="ElementShortName">S_SET</obj_property>
+      <obj_property name="ObjectShortName">S_SET</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/cmd_wd_reg">
+      <obj_property name="ElementShortName">cmd_wd_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cmd_wd_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/cmd_rd_reg">
+      <obj_property name="ElementShortName">cmd_rd_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cmd_rd_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagStart">
+      <obj_property name="ElementShortName">flagStart</obj_property>
+      <obj_property name="ObjectShortName">flagStart</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/stm_state">
+      <obj_property name="ElementShortName">stm_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">stm_state[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagMS">
+      <obj_property name="ElementShortName">flagMS</obj_property>
+      <obj_property name="ObjectShortName">flagMS</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagMS25000_0">
+      <obj_property name="ElementShortName">flagMS25000_0</obj_property>
+      <obj_property name="ObjectShortName">flagMS25000_0</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagMS25000_1">
+      <obj_property name="ElementShortName">flagMS25000_1</obj_property>
+      <obj_property name="ObjectShortName">flagMS25000_1</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagMS25000_2">
+      <obj_property name="ElementShortName">flagMS25000_2</obj_property>
+      <obj_property name="ObjectShortName">flagMS25000_2</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagMS25000_3">
+      <obj_property name="ElementShortName">flagMS25000_3</obj_property>
+      <obj_property name="ObjectShortName">flagMS25000_3</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/countRepeat">
+      <obj_property name="ElementShortName">countRepeat[3:0]</obj_property>
+      <obj_property name="ObjectShortName">countRepeat[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/countStart">
+      <obj_property name="ElementShortName">countStart[6:0]</obj_property>
+      <obj_property name="ObjectShortName">countStart[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/count_qspi_bytes">
+      <obj_property name="ElementShortName">count_qspi_bytes[3:0]</obj_property>
+      <obj_property name="ObjectShortName">count_qspi_bytes[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/count_get_data_bytes">
+      <obj_property name="ElementShortName">count_get_data_bytes[9:0]</obj_property>
+      <obj_property name="ObjectShortName">count_get_data_bytes[9:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagGetDataFE">
+      <obj_property name="ElementShortName">flagGetDataFE</obj_property>
+      <obj_property name="ObjectShortName">flagGetDataFE</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/getData512">
+      <obj_property name="ElementShortName">getData512[7:0]</obj_property>
+      <obj_property name="ObjectShortName">getData512[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/qspi_bit_itr7">
+      <obj_property name="ElementShortName">qspi_bit_itr7</obj_property>
+      <obj_property name="ObjectShortName">qspi_bit_itr7</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagActIdle">
+      <obj_property name="ElementShortName">flagActIdle</obj_property>
+      <obj_property name="ObjectShortName">flagActIdle</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagWriteWait">
+      <obj_property name="ElementShortName">flagWriteWait[3:0]</obj_property>
+      <obj_property name="ObjectShortName">flagWriteWait[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/setData512Grid">
+      <obj_property name="ElementShortName">setData512Grid[7:0]</obj_property>
+      <obj_property name="ObjectShortName">setData512Grid[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/fifo_set_rd">
+      <obj_property name="ElementShortName">fifo_set_rd</obj_property>
+      <obj_property name="ObjectShortName">fifo_set_rd</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/fifo_set_wr">
+      <obj_property name="ElementShortName">fifo_set_wr</obj_property>
+      <obj_property name="ObjectShortName">fifo_set_wr</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/setData512Fifo">
+      <obj_property name="ElementShortName">setData512Fifo[7:0]</obj_property>
+      <obj_property name="ObjectShortName">setData512Fifo[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/fifo_set_full">
+      <obj_property name="ElementShortName">fifo_set_full</obj_property>
+      <obj_property name="ObjectShortName">fifo_set_full</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/fifo_set_empty">
+      <obj_property name="ElementShortName">fifo_set_empty</obj_property>
+      <obj_property name="ObjectShortName">fifo_set_empty</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/TMP_FE">
+      <obj_property name="ElementShortName">TMP_FE[7:0]</obj_property>
+      <obj_property name="ObjectShortName">TMP_FE[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/TMP_AA">
+      <obj_property name="ElementShortName">TMP_AA[7:0]</obj_property>
+      <obj_property name="ObjectShortName">TMP_AA[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/TMP_FF">
+      <obj_property name="ElementShortName">TMP_FF[7:0]</obj_property>
+      <obj_property name="ObjectShortName">TMP_FF[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/misoFetch">
+      <obj_property name="ElementShortName">misoFetch[7:0]</obj_property>
+      <obj_property name="ObjectShortName">misoFetch[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/misoCount">
+      <obj_property name="ElementShortName">misoCount[3:0]</obj_property>
+      <obj_property name="ObjectShortName">misoCount[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/mmc_ctrl_inst/flagMISO">
+      <obj_property name="ElementShortName">flagMISO</obj_property>
+      <obj_property name="ObjectShortName">flagMISO</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/QSPI_IDLE">
+      <obj_property name="ElementShortName">QSPI_IDLE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">QSPI_IDLE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/QSPI_WRITE">
+      <obj_property name="ElementShortName">QSPI_WRITE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">QSPI_WRITE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/QSPI_READ">
+      <obj_property name="ElementShortName">QSPI_READ[31:0]</obj_property>
+      <obj_property name="ObjectShortName">QSPI_READ[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_WD_REG">
+      <obj_property name="ElementShortName">CMD_WD_REG[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_WD_REG[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_RD_REG">
+      <obj_property name="ElementShortName">CMD_RD_REG[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_RD_REG[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_POWER_UP">
+      <obj_property name="ElementShortName">STM_POWER_UP[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_POWER_UP[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_RESET">
+      <obj_property name="ElementShortName">STM_RESET[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_RESET[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_LEAD">
+      <obj_property name="ElementShortName">STM_LEAD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_LEAD[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_DISABLE_CRC">
+      <obj_property name="ElementShortName">STM_DISABLE_CRC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_DISABLE_CRC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_WAKE_NA">
+      <obj_property name="ElementShortName">STM_WAKE_NA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_WAKE_NA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_BKLEN">
+      <obj_property name="ElementShortName">STM_BKLEN[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_BKLEN[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_IDLE">
+      <obj_property name="ElementShortName">STM_IDLE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_IDLE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_READ">
+      <obj_property name="ElementShortName">STM_READ[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_READ[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_GET_DATA">
+      <obj_property name="ElementShortName">STM_GET_DATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_GET_DATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_WRITE">
+      <obj_property name="ElementShortName">STM_WRITE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_WRITE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_SET_DATA">
+      <obj_property name="ElementShortName">STM_SET_DATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_SET_DATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_WRITE_WAIT">
+      <obj_property name="ElementShortName">STM_WRITE_WAIT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_WRITE_WAIT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_WAKE_SDC">
+      <obj_property name="ElementShortName">STM_WAKE_SDC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_WAKE_SDC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_PRINT">
+      <obj_property name="ElementShortName">STM_PRINT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_PRINT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_SET_DUMMY_FOR_WRITE">
+      <obj_property name="ElementShortName">STM_SET_DUMMY_FOR_WRITE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_SET_DUMMY_FOR_WRITE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/STM_NULL">
+      <obj_property name="ElementShortName">STM_NULL[31:0]</obj_property>
+      <obj_property name="ObjectShortName">STM_NULL[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/SIZE_CMD_BYTES">
+      <obj_property name="ElementShortName">SIZE_CMD_BYTES[31:0]</obj_property>
+      <obj_property name="ObjectShortName">SIZE_CMD_BYTES[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/SIZE_DATA_BYTES">
+      <obj_property name="ElementShortName">SIZE_DATA_BYTES[31:0]</obj_property>
+      <obj_property name="ObjectShortName">SIZE_DATA_BYTES[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_RESET">
+      <obj_property name="ElementShortName">CMD_RESET[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_RESET[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_ZERO">
+      <obj_property name="ElementShortName">CMD_ZERO[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_ZERO[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_FF">
+      <obj_property name="ElementShortName">CMD_FF[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_FF[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_CRC">
+      <obj_property name="ElementShortName">CMD_CRC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_CRC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_CRC_FE">
+      <obj_property name="ElementShortName">CMD_CRC_FE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_CRC_FE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_CRC_FF">
+      <obj_property name="ElementShortName">CMD_CRC_FF[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_CRC_FF[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_LEAD">
+      <obj_property name="ElementShortName">CMD_LEAD[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_LEAD[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_WAKE_NA">
+      <obj_property name="ElementShortName">CMD_WAKE_NA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_WAKE_NA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_WAKE_SDC">
+      <obj_property name="ElementShortName">CMD_WAKE_SDC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_WAKE_SDC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_CRC_WAKE_NA">
+      <obj_property name="ElementShortName">CMD_CRC_WAKE_NA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_CRC_WAKE_NA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_WAKE">
+      <obj_property name="ElementShortName">CMD_WAKE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_WAKE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_BKLEN">
+      <obj_property name="ElementShortName">CMD_BKLEN[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_BKLEN[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_READ">
+      <obj_property name="ElementShortName">CMD_READ[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_READ[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_CRC_READ">
+      <obj_property name="ElementShortName">CMD_CRC_READ[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_CRC_READ[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_WRITE">
+      <obj_property name="ElementShortName">CMD_WRITE[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_WRITE[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_DISABLE_CRC">
+      <obj_property name="ElementShortName">CMD_DISABLE_CRC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_DISABLE_CRC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/mmc_ctrl_inst/CMD_CRC_CMD59">
+      <obj_property name="ElementShortName">CMD_CRC_CMD59[31:0]</obj_property>
+      <obj_property name="ObjectShortName">CMD_CRC_CMD59[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/clkBram">
+      <obj_property name="ElementShortName">clkBram</obj_property>
+      <obj_property name="ObjectShortName">clkBram</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/ROUTE_TS_01">
+      <obj_property name="ElementShortName">ROUTE_TS_01</obj_property>
+      <obj_property name="ObjectShortName">ROUTE_TS_01</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/OP_JMP_FLAG_FROM_GRID">
+      <obj_property name="ElementShortName">OP_JMP_FLAG_FROM_GRID</obj_property>
+      <obj_property name="ObjectShortName">OP_JMP_FLAG_FROM_GRID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROM_ADDR_FROM_GRID">
+      <obj_property name="ElementShortName">ROM_ADDR_FROM_GRID[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ROM_ADDR_FROM_GRID[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/romLLL">
+      <obj_property name="ElementShortName">romLLL[7:0]</obj_property>
+      <obj_property name="ObjectShortName">romLLL[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/romLLU">
+      <obj_property name="ElementShortName">romLLU[7:0]</obj_property>
+      <obj_property name="ObjectShortName">romLLU[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/romLUL">
+      <obj_property name="ElementShortName">romLUL[7:0]</obj_property>
+      <obj_property name="ObjectShortName">romLUL[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/romLUU">
+      <obj_property name="ElementShortName">romLUU[7:0]</obj_property>
+      <obj_property name="ObjectShortName">romLUU[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/romULL">
+      <obj_property name="ElementShortName">romULL[7:0]</obj_property>
+      <obj_property name="ObjectShortName">romULL[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/romULU">
+      <obj_property name="ElementShortName">romULU[7:0]</obj_property>
+      <obj_property name="ObjectShortName">romULU[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/romUUL">
+      <obj_property name="ElementShortName">romUUL[7:0]</obj_property>
+      <obj_property name="ObjectShortName">romUUL[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/romUUU">
+      <obj_property name="ElementShortName">romUUU[7:0]</obj_property>
+      <obj_property name="ObjectShortName">romUUU[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROM_LLL">
+      <obj_property name="ElementShortName">ROM_LLL[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ROM_LLL[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROM_LLU">
+      <obj_property name="ElementShortName">ROM_LLU[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ROM_LLU[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROM_LUL">
+      <obj_property name="ElementShortName">ROM_LUL[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ROM_LUL[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROM_LUU">
+      <obj_property name="ElementShortName">ROM_LUU[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ROM_LUU[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROM_ULL">
+      <obj_property name="ElementShortName">ROM_ULL[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ROM_ULL[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROM_ULU">
+      <obj_property name="ElementShortName">ROM_ULU[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ROM_ULU[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROM_UUL">
+      <obj_property name="ElementShortName">ROM_UUL[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ROM_UUL[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROM_UUU">
+      <obj_property name="ElementShortName">ROM_UUU[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ROM_UUU[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROUTE_TOP_BRAM_DQ_READ">
+      <obj_property name="ElementShortName">ROUTE_TOP_BRAM_DQ_READ[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ROUTE_TOP_BRAM_DQ_READ[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/ROUTE_TOP_BRAM_ADDR">
+      <obj_property name="ElementShortName">ROUTE_TOP_BRAM_ADDR[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ROUTE_TOP_BRAM_ADDR[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/req_bram_op">
+      <obj_property name="ElementShortName">req_bram_op</obj_property>
+      <obj_property name="ObjectShortName">req_bram_op</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/ack_bram_op">
+      <obj_property name="ElementShortName">ack_bram_op</obj_property>
+      <obj_property name="ObjectShortName">ack_bram_op</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/op_jmp_flag_from_grid">
+      <obj_property name="ElementShortName">op_jmp_flag_from_grid</obj_property>
+      <obj_property name="ObjectShortName">op_jmp_flag_from_grid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/rom_addr_from_grid">
+      <obj_property name="ElementShortName">rom_addr_from_grid[15:0]</obj_property>
+      <obj_property name="ObjectShortName">rom_addr_from_grid[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/romAckStart">
+      <obj_property name="ElementShortName">romAckStart</obj_property>
+      <obj_property name="ObjectShortName">romAckStart</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/romSetStart">
+      <obj_property name="ElementShortName">romSetStart</obj_property>
+      <obj_property name="ObjectShortName">romSetStart</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/waitItrRomClk">
+      <obj_property name="ElementShortName">waitItrRomClk</obj_property>
+      <obj_property name="ObjectShortName">waitItrRomClk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/itrAckClk">
+      <obj_property name="ElementShortName">itrAckClk</obj_property>
+      <obj_property name="ObjectShortName">itrAckClk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/top_tb/top_inst/BramLoader_inst/itrRomClk">
+      <obj_property name="ElementShortName">itrRomClk</obj_property>
+      <obj_property name="ObjectShortName">itrRomClk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/BRAM_COUNTER">
+      <obj_property name="ElementShortName">BRAM_COUNTER[3:0]</obj_property>
+      <obj_property name="ObjectShortName">BRAM_COUNTER[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/REG_TOP_BRAM_ADDR">
+      <obj_property name="ElementShortName">REG_TOP_BRAM_ADDR[15:0]</obj_property>
+      <obj_property name="ObjectShortName">REG_TOP_BRAM_ADDR[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/top_tb/top_inst/BramLoader_inst/romAddr">
+      <obj_property name="ElementShortName">romAddr[15:0]</obj_property>
+      <obj_property name="ObjectShortName">romAddr[15:0]</obj_property>
+   </wvobject>
+</wave_config>
