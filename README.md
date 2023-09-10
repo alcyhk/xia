@@ -20,24 +20,20 @@ In order to start the demo, you may need to properly setup your working environm
 Arty 35T  
 <img src="photos/arty35.jpg" title="FPGA Arty 35 Board" width=50%>
 
-
 Alientek TFT LCD 4:3 800x480(NT35510+GT9117)  
-<pic/official link>
+<img src="photos/alientekTFT.jpg" title="Alientek TFT LCD" width=50%>
    
-Waveshare MMC Module  
-<pic/official link>
+Waveshare MMC Module for the FPGA Board
+<img src="photos/mmcSPI.jpg" title="Waveshare MMC Module" width=50%>
 
 Extension Board Or Direct GPIOs  
-<pic/official link>
+<img src="photos/extBoard.png" title="Extension Board" width=50%>
 
-mmc card reader for computer  
-<pic/official link>
-
-mmc card reader for the FPGA board  
-<pic/official link>
+MMC reader for computer  
+<img src="photos/mmcReader.jpg" title="MMC Reader" width=50%>
 
 micro USB Cable  
-<pic/official link>
+<img src="photos/microUSB.jpg" title="Micro USB" width=50%>
 
 ### SW(Software) Requirements
 
