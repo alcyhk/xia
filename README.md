@@ -10,13 +10,6 @@ xia is designed to be the barebone of any quantum device. xia_1st is designed to
 ## Demo
 <a href="repo/demo.mp4">Click to download the video</a>
 
-
-
-
-
-
-<video src="https://github.com/alcyhk/xia/assets/2801096/2d094cac-f9f7-4eb1-9078-343eb26beeb9" controls="controls" width="500" height="300"></video>
-
 ## Preface
 In order to start the demo, you may need to properly setup your working environment beforehand. The extension board is taylormade for the ease of connecting wire. Please feel free to download the cad file and print it yourself. If you are okay to connect the jumper wires, which is about 40 of these, it should work too.
 
