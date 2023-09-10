@@ -35,6 +35,10 @@ MMC reader for computer
 micro USB Cable  
 <img src="photos/microUSB.jpg" title="Micro USB" width=50%>
 
+Altogether
+<img src="photos/altogether.jpg" title="Micro USB" width=50%>
+
+
 ### SW(Software) Requirements
 
 Ubuntu
