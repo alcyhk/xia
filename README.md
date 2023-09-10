@@ -18,7 +18,8 @@ In order to start the demo, you may need to properly setup your working environm
 
 ### HW(Hardware) Requirements
 Arty 35T  
-<pic/official link>
+<img src="photos/arty35.png" title="FPGA Arty 35 Board" width=50%>
+
 
 Alientek TFT LCD 4:3 800x480(NT35510+GT9117)  
 <pic/official link>
