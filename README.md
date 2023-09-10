@@ -9,7 +9,7 @@ xia is designed to be the barebone of any quantum device. xia_1st is designed to
 
 ## Demo
 
-<video width="630" height="300" src="https://github.com/alcyhk/xia/assets/2801096/e02987ca-6bd0-4cb0-8c05-596bf6f592fd"></video>
+<video width="630" height="300" src="https://github.com/alcyhk/xia/blob/main/repo/demo.mp4"></video>
 
 
 
