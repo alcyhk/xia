@@ -8,8 +8,9 @@ xia (also known as X inside Architecture) is a family of grid instruction set co
 xia is designed to be the barebone of any quantum device. xia_1st is designed to be a workable architecture which allows users to perform basic touch, display and wireless feature. xia_1st allows developers to connect various modules via FSMC, DDR, TTL, SPI, TWI and GPIO. A workable demo is performed by the FPGA board arty 35.
 
 ## Demo
-<Video/Gif>
-
+<video id="video" controls="" preload="none" poster="front">
+      <source id="mp4" src="repo/demo.mp4" type="video/mp4">
+</videos>
 
 ## Preface
 In order to start the demo, you may need to properly setup your working environment beforehand. The extension board is taylormade for the ease of connecting wire. Please feel free to download the cad file and print it yourself. If you are okay to connect the jumper wires, which is about 40 of these, it should work too.
@@ -18,25 +19,26 @@ In order to start the demo, you may need to properly setup your working environm
 
 ### HW(Hardware) Requirements
 Arty 35T  
-<img src="photos/arty35.jpg" title="FPGA Arty 35 Board" width=50%>
+<img src="repo/arty35.jpg" title="FPGA Arty 35 Board" width=50%>
+
 
 Alientek TFT LCD 4:3 800x480(NT35510+GT9117)  
-<img src="photos/alientekTFT.jpg" title="Alientek TFT LCD" width=50%>
-   
-Waveshare MMC Module for the FPGA Board
-<img src="photos/mmcSPI.jpg" title="Waveshare MMC Module" width=50%>
+<img src="repo/alientekTFT.jpg" title="Alientek TFT LCD" width=50%>  
+
+Waveshare MMC Module for the FPGA Board  
+<img src="repo/mmcSPI.jpg" title="Waveshare MMC Module" width=50%>
 
 Extension Board Or Direct GPIOs  
-<img src="photos/extBoard.png" title="Extension Board" width=50%>
+<img src="repo/extBoard.png" title="Extension Board" width=50%>
 
 MMC reader for computer  
-<img src="photos/mmcReader.jpg" title="MMC Reader" width=50%>
+<img src="repo/mmcReader.jpg" title="MMC Reader" width=50%>
 
 micro USB Cable  
-<img src="photos/microUSB.jpg" title="Micro USB" width=50%>
+<img src="repo/microUSB.jpg" title="Micro USB" width=50%>
 
-Altogether
-<img src="photos/altogether.jpg" title="Micro USB" width=50%>
+Altogether  
+<img src="repo/altogether.jpg" title="Micro USB" width=50%>
 
 
 ### SW(Software) Requirements
