@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "define.h"
  
+ 
+#define RELEASE 
+ 
 #define TEST_MMC_DDR3_PHY 
 #define TEST_MMC_DDR3_PHY_FMC
 #define TEST_MMC_DDR3_PHY_TWI
@@ -1229,6 +1232,11 @@ void printHeader();
 void printFooter();
 int main(){
 	openFile();
+	
+ 	#ifdef RELEASE   
+ 	printHeader();
+ 	#endif	
+	
 #if defined TEST_MMC_DDR3_PHY 
 code_loadMMC();
 code_writeDDR();
@@ -1241,6 +1249,11 @@ code_fetch_op();
 code_runtime();
 code_next_or_end();
 #endif
+
+#ifdef RELEASE   
+ 	printFooter();
+ 	#endif	
+
 closeFile();
 	return 0;
 }
@@ -1259,10 +1272,8 @@ void convertX(unsigned long a, unsigned long b, unsigned int c)
    	
 	#ifdef DEBUG   
    	fprintf(fp, "convertX: %lx ", mix);
-	#endif
- 
-   	
-   	unsigned int h0,h1,h2,h3, h4,h5,h6,h7;
+	#endif	
+	unsigned int h0,h1,h2,h3, h4,h5,h6,h7;
    	h0 = mix%256;
    	mix = mix/256;
    	h1 = mix%256;
@@ -1278,6 +1289,21 @@ void convertX(unsigned long a, unsigned long b, unsigned int c)
 	h6 = mix%256;
 	mix = mix/256;
 	h7 = mix%256;   
+ 	#ifdef RELEASE   
+   	fprintf(fp, "%x%x ",h0/16,h0%16);
+	fprintf(fp, "%x%x ",h1/16,h1%16);
+	fprintf(fp, "%x%x ",h2/16,h2%16);
+	fprintf(fp, "%x%x ",h3/16,h3%16);
+	
+	fprintf(fp, "%x%x ",h4/16,h4%16);
+	fprintf(fp, "%x%x ",h5/16,h5%16);
+	fprintf(fp, "%x%x ",h6/16,h6%16);
+	fprintf(fp, "%x%x ",h7/16,h7%16);
+   	#else
+   	
+	
+	
+	
 	fprintf(fp, "\'h%x:out <= \'h",line*8);
 	fprintf(fp, "%x%x ",h0/16,h0%16);
 	fprintf(fp, ";\n");
@@ -1303,7 +1329,7 @@ void convertX(unsigned long a, unsigned long b, unsigned int c)
 	fprintf(fp, "%x%x ",h7/16,h7%16);
 	fprintf(fp, ";\n");
 	
-	
+	#endif	
 	
 	
 	
@@ -1434,7 +1460,10 @@ void convertJ()
 {
 	#ifdef DEBUG
 	fprintf(fp, "convertJ: 1010101010101000 ");
-	#endif
+	#endif	
+	#ifdef RELEASE
+	fprintf(fp, "10 10 10 10 10 10 10 00 ");
+	#else
 	
 	fprintf(fp, "\'h%x:out <= \'h10 ;\n",line*8);
 	fprintf(fp, "\'h%x:out <= \'h10 ;\n",line*8+1);
@@ -1444,6 +1473,7 @@ void convertJ()
 	fprintf(fp, "\'h%x:out <= \'h10 ;\n",line*8+5);
 	fprintf(fp, "\'h%x:out <= \'h10 ;\n",line*8+6);
 	fprintf(fp, "\'h%x:out <= \'h00 ;\n",line*8+7);
+	#endif	
 	printf("%x: ",line++);
 	printf("OP_JMP\n");
 }
