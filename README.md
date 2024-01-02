@@ -15,7 +15,7 @@ Click to download the video
 <a href="repo/xia.mp4">High Level Demo (16MB)</a>
 
 ## Preface
-In order to start the demo, you may need to properly setup your working environment beforehand. The extension board is taylormade for the ease of connecting wire. Please feel free to download the cad file and print it yourself. If you are okay to connect the jumper wires, which is about 40 of these, it should work too.
+In order to start the demo, you may need to properly setup your working environment beforehand. The extension board is taylormade for the ease of connecting wire. Please feel free to download the cad file and print it yourself. If you are okay to connect the jumper wires, which is about 40 of these, it should work fine.
 
 ## Environment
 
