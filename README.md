@@ -8,7 +8,10 @@ xia (also known as X inside Architecture) is a family of grid instruction set co
 xia is designed to be the barebone of any quantum device. xia_1st is designed to be a workable architecture which allows users to perform basic touch, display and wireless feature. xia_1st allows developers to connect various modules via FSMC, DDR, TTL, SPI, TWI and GPIO. A workable demo is performed by the FPGA board arty 35.
 
 ## Demo
-<a href="repo/demo.mp4">Click to download the video</a>
+Click to download the video
+<a href="repo/demo.mp4">Low Level Demo (6.6MB)</a>
+
+<a href="repo/xia.mp4">High Level Demo (16MB)</a>
 
 ## Preface
 In order to start the demo, you may need to properly setup your working environment beforehand. The extension board is taylormade for the ease of connecting wire. Please feel free to download the cad file and print it yourself. If you are okay to connect the jumper wires, which is about 40 of these, it should work too.
