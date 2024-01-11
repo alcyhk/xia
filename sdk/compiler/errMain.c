@@ -151,8 +151,8 @@ char funcName[][40] =
 	"anaGet",
 
 	"arith"
-	,"pts"
-	,"ptg"
+	,"pts"//pointer set
+	,"ptg"//pointer get
 
 	,"blk2Mem"
 	,"mem2Blk"

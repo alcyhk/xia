@@ -4,9 +4,15 @@
 assign(z,300);
 div(z,100);
 setc0(z);
+setc0(z);
 
 fontSetup();
 loadDefaultFont();
+
 opening();
+
 drawMainScene();
+
 runMainScene();
+
+

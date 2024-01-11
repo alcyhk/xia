@@ -93,6 +93,7 @@ func fontSetup();
 	assign(font_vBar    ,491611);
 	assign(font_rCurly  ,491612);
 	assign(font_tilde   ,491613);
+	assign(font_space   ,491614);
 
 end();
 
@@ -288,6 +289,8 @@ func loadDefaultFont();
 	ldb(font_rCurly  ,fontRam);
 	add(fontRam,256);
 	ldb(font_tilde   ,fontRam);
+	add(fontRam,256);
+	ldb(font_space   ,fontRam);
 	
 
 end();

@@ -15,6 +15,40 @@ func cleanScreen();
 	add(d,1);
 	}
 end();
+func cleanFont();
+	assign(xs,drawFontX);
+	assign(ys,drawFontY);
+	assign(xe,xs);
+	assign(ye,ys);
+	add(xe,16);
+	add(ye,16);
+	assign(s,xs);
+	assign(e,xe);
+	mul(s,65536);
+	add(s,ys);
+	arith(e,16,34);
+	add(e,ye);
+	drawFill(0,s,e);
+	
+end();
+
+func cleanBar();
+	assign(xs,0);
+	assign(ys,550);
+	assign(xe,479);
+	assign(ye,566);
+	assign(s,xs);
+	assign(e,xe);
+	mul(s,65536);
+	add(s,ys);
+	arith(e,16,34);
+	add(e,ye);
+	drawFill(0,s,e);
+	assign(d,0);
+	while(d < 50){
+	add(d,1);
+	}
+end();
 func opening();
 	cleanScreen();
 	assign(d,18);
@@ -94,7 +128,7 @@ func drawMainScene();
 	add(origin, 5898240);
 	drawAppAna();
 	add(origin, 5898240);
-	drawAppCalc();
+	drawAppChat();
 	add(origin, 5898240);
 	drawAppDraw();
 end();
@@ -287,7 +321,7 @@ func drawAppAna();
 	assign(a,font_a);
 	drb(a,b,c);
 end();
-func drawAppCalc();
+func drawAppChat();
 	assign(shape,462848);
 	assign(h_line,462848);
 	assign(v_line,462849);
@@ -342,13 +376,13 @@ func drawAppCalc();
 	assign(a,font_c);
 	drb(a,b,c);
 	add(b,x_step);
+	assign(a,font_h);
+	drb(a,b,c);
+	add(b,x_step);
 	assign(a,font_a);
 	drb(a,b,c);
 	add(b,x_step);
-	assign(a,font_l);
-	drb(a,b,c);
-	add(b,x_step);
-	assign(a,font_c);
+	assign(a,font_t);
 	drb(a,b,c);
 end();
 func drawAppEcho();
@@ -490,6 +524,22 @@ func drawFont();
 	sub(drawFontX,drawFontY);
 	div(drawFontX,65536); 
 end();
+
+
+func convertCaptured();
+	//33 to 126
+	if(inputCaptured > 32 && inputCaptured < 127){
+		add(inputCaptured,491487);
+	}
+
+	//0a \n
+	//if(inputCaptured == 10){
+
+	//}
+
+	assign(cursorArea,inputCaptured);
+	
+end();
 func runMainScene();
 	assign(tchB,128);
 	assign(state,0);
@@ -502,46 +552,83 @@ func runMainScene();
 					pressEchoApp(); 
 					pressGpioApp();
 					pressAnaApp();
-					pressCalcApp();
+					pressChatApp();
 					pressAppDraw();
 					assign(acted,1);
 				}
 				runEchoApp();
 				runGpioApp();
 				runAnaApp();
-				runCalcApp();
+				runAppChat();
 				runAppDraw();
 			}
 		}else if(tchA==tchB){
-			assign(d,0);
-			while(d<25){
-				getTouch(x,y);
-				add(d,1);
-			}
+			//assign(d,0);
+			//while(d<10){//25 safest
+			getTouch(x,y);
+			//add(d,1);
+			//}
 			assign(x,479);
 			assign(y,799);
 			assign(acted,0);
 		}
 		if(state == 1){	
-			chkc(state1GetChar,0);
+			chkc(state0GetChar,0);
+			if(state0GetChar == 0){
+				getc(state0GetChar,0);
+				setc(state0GetChar,0);
+				// setc(state1GetChar,1);
+				// setc(state1GetChar,2);
+				// setc(state1GetChar,3);
+				// spiSet(state1GetChar,0);
+				// spiGet(state1GetChar,0);
+				// setc(state1GetChar,0);
+				// spiSet(state1GetChar,0);
+				// twiSet(78,4);
+				// twiSet(85,0);
+				// twiSet(85,2);
+			}
+			chkc(state1GetChar,1);
 			if(state1GetChar == 0){
-				getc(state1GetChar,0);
-				setc(state1GetChar,0);
+				getc(state1GetChar,1);
 				setc(state1GetChar,1);
-				setc(state1GetChar,2);
-				setc(state1GetChar,3);
-				spiSet(state1GetChar,0);
-				spiGet(state1GetChar,0);
-				setc(state1GetChar,0);
-				spiSet(state1GetChar,0);
-				twiSet(78,4);
-				twiSet(85,0);
-				twiSet(85,2);
+			}	
+			chkc(state2GetChar,2);
+			if(state2GetChar == 0){
+				getc(state2GetChar,2);
+				setc(state2GetChar,2);
+			}	
+			chkc(state3GetChar,3);
+			if(state3GetChar == 0){
+				getc(state3GetChar,3);
+				setc(state3GetChar,3);
 			}		
 		}
 		if(state == 2){
 			gpioGet(gpio);
 			gpioSet(gpio);
+		}
+		if(state == 4){
+			chkc(inputCaptured,1);
+			if(inputCaptured == 0){
+				getc(inputCaptured,1);
+				div(inputCaptured,256);
+				//setc(inputCaptured,0);
+				//print 28+16 == 44
+				//convert inputCaptured to font for cursorArea
+				convertCaptured();
+				if(cursorArea > 491520 && cursorArea < 491614){
+					displayCursorArea();
+					updateCursorArea();
+
+				}
+				if(cursorArea == 10){
+					updateCursorAreaNextLine();
+				}
+				if(cursorArea == 32){
+					updateCursorArea();
+				}
+			}
 		}
 	}
 end();
@@ -634,131 +721,501 @@ func pressAnaApp();
 		}
 	}
 end();
-func pressCalcApp();
+func kbdDrawCap();
+	assign(drawFontY,600)
+		assign(drawFontX,24)
+
+		assign(drawFontCurr,font_Q);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_W);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_E);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_R);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_T);
+		drawFont();
+		add(drawFontX,48);
+
+
+
+		assign(drawFontCurr,font_Y);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_U);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_I);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_O);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_P);
+		drawFont();
+		assign(drawFontX,48);
+
+		add(drawFontY,48)
+		assign(drawFontCurr,font_A);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_S);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_D);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_F);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_G);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_H);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_J);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_K);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_L);
+		drawFont();
+		//add(drawFontX,48);
+		//assign(drawFontCurr,font_d);
+		//drawFont();
+		assign(drawFontX,48);
+
+		add(drawFontY,48)
+		assign(drawFontCurr,font_plus);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_Z);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_X);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_C);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_V);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_B);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_N);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_M);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_less);
+		drawFont();
+		
+		assign(drawFontX,48);
+
+		add(drawFontY,48)
+		assign(drawFontCurr,font_pound);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_bSlash);
+		drawFont();
+		add(drawFontX,288);
+		assign(drawFontCurr,font_dot);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_greater);
+		drawFont();
+		//add(drawFontX,48);
+		//assign(drawFontCurr,font_h);
+		//drawFont();
+		assign(drawFontX,24);
+
+end();
+
+func kbdDrawInit();
+	assign(drawFontY,600)
+		assign(drawFontX,24)
+
+		assign(drawFontCurr,font_q);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_w);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_e);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_r);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_t);
+		drawFont();
+		add(drawFontX,48);
+
+
+
+		assign(drawFontCurr,font_y);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_u);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_i);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_o);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_p);
+		drawFont();
+		assign(drawFontX,48);
+
+		add(drawFontY,48)
+		assign(drawFontCurr,font_a);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_s);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_d);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_f);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_g);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_h);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_j);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_k);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_l);
+		drawFont();
+		//add(drawFontX,48);
+		//assign(drawFontCurr,font_d);
+		//drawFont();
+		assign(drawFontX,48);
+
+		add(drawFontY,48)
+		assign(drawFontCurr,font_plus);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_z);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_x);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_c);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_v);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_b);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_n);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_m);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_less);
+		drawFont();
+		
+		assign(drawFontX,48);
+
+		add(drawFontY,48)
+		assign(drawFontCurr,font_pound);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_bSlash);
+		drawFont();
+		add(drawFontX,288);
+		assign(drawFontCurr,font_dot);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_greater);
+		drawFont();
+		//add(drawFontX,48);
+		//assign(drawFontCurr,font_h);
+		//drawFont();
+		assign(drawFontX,24);
+end();
+
+func kbdDrawSymbol();
+	assign(drawFontY,600)
+		assign(drawFontX,24)
+
+		assign(drawFontCurr,font_1);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_2);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_3);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_4);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_5);
+		drawFont();
+		add(drawFontX,48);
+
+
+
+		assign(drawFontCurr,font_6);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_7);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_8);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_9);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_0);
+		drawFont();
+		assign(drawFontX,48);
+
+		add(drawFontY,48)
+		assign(drawFontCurr,font_at);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_pound);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_dollar);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_uscore);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_and);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_minus);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_plus);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_lParent);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_rParent);
+		drawFont();
+		assign(drawFontX,48);
+
+		add(drawFontY,48)
+		assign(drawFontCurr,font_plus);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_sQuote);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_dQuote);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_slash);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_colon);
+		drawFont();
+		add(drawFontX,48);
+
+		assign(drawFontCurr,font_scolon);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_exclam);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_qMark);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_less);
+		drawFont();
+		
+		assign(drawFontX,48);
+
+		add(drawFontY,48)
+		assign(drawFontCurr,font_pound);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_comma);
+		drawFont();
+		add(drawFontX,288);
+		assign(drawFontCurr,font_equal);
+		drawFont();
+		add(drawFontX,48);
+		assign(drawFontCurr,font_greater);
+		drawFont();
+		//add(drawFontX,48);
+		//assign(drawFontCurr,font_h);
+		//drawFont();
+		assign(drawFontX,24);
+end();
+
+func pressChatApp();
+
 	if(x > 298 && x < 362 && y > 42 && y < 110){
 		cleanScreen();
 		assign(drawFontCurr,font_c);
 		assign(drawFontX,208);
 		assign(drawFontY,28);
 		drawFont();
-		assign(drawFontCurr,font_a);
+		assign(drawFontCurr,font_h);
 		assign(drawFontX,224);
 		assign(drawFontY,28);
 		drawFont();
-		assign(drawFontCurr,font_l);
+		assign(drawFontCurr,font_a);
 		assign(drawFontX,240);
 		assign(drawFontY,28);
 		drawFont();
-		assign(drawFontCurr,font_c);
+		assign(drawFontCurr,font_t);
 		assign(drawFontX,256);
 		assign(drawFontY,28);
 		drawFont();
 		drawIconBack();
+
+
 		assign(drawFontCurr,font_minus);
 		assign(drawFontX,480);
-		assign(drawFontY,152);
+		assign(drawFontY,550);
 		assign(d,0);
 		assign(e,0);
-		while(e < 7){
-			while(d<15){
-				sub(drawFontX,32);
-				drawFont();
-				add(d,1);
-			}
-			assign(d,0);
-			add(e,1);
-			assign(drawFontX,480);						
-			add(drawFontY,100);
+		while(d<31){
+			sub(drawFontX,16);
+			drawFont();
+			add(d,1);
 		}
-		assign(drawFontCurr,font_vBar);
-		assign(d,0);
-		assign(e,0);
-		assign(drawFontX,0);
-		assign(drawFontY,752);
-		while(e < 5){
-			while(d<15){
-				sub(drawFontY,32);
-				drawFont();
-				add(d,1);
-			}
-			assign(d,0);
-			add(e,1);
-			assign(drawFontY,752);						
-			add(drawFontX,96);
-		}
-		assign(drawFontCurr,font_c);
-		assign(drawFontX,0);
-		assign(drawFontY,252);
-		add(drawFontX,48);
-		add(drawFontY,48);
-		drawFont();
-		assign(drawFontCurr,font_slash);
-		assign(drawFontX,0);
-		add(drawFontX,96);
-		add(drawFontX,96);
-		add(drawFontX,96);
-		assign(drawFontY,252);
-		add(drawFontX,48);
-		add(drawFontY,48);
-		drawFont();
-		assign(drawFontCurr,font_7);
-		assign(drawFontX,0);
-		assign(drawFontY,352);
-		add(drawFontX,48);
-		add(drawFontY,48);
-		drawFont();
-		assign(drawFontCurr,font_8);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_9);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_asterisk);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_4);
-		assign(drawFontX,0);
-		assign(drawFontY,452);
-		add(drawFontX,48);
-		add(drawFontY,48);
-		drawFont();
-		assign(drawFontCurr,font_5);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_6);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_minus);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_1);
-		assign(drawFontX,0);
-		assign(drawFontY,452);
-		add(drawFontX,48);
-		add(drawFontY,48);
-		drawFont();
-		assign(drawFontCurr,font_2);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_3);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_plus);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_0);
-		assign(drawFontX,0);
-		assign(drawFontY,552);
-		add(drawFontX,48);
-		add(drawFontY,48);
-		drawFont();
-		add(drawFontX,96);
-		assign(drawFontCurr,font_dot);
-		add(drawFontX,96);
-		drawFont();
-		assign(drawFontCurr,font_equal);
-		add(drawFontX,96);
-		drawFont();
+		assign(kbdState,0);
+
+		assign(cursorRow,0);
+		assign(cursorCol,0);
+
+		assign(cursorFont,0);
+		assign(cursor,0);
+		assign(cursor0,0);
+		assign(cursor1,0);
+		assign(cursor2,0);
+		assign(cursor3,0);
+		assign(cursor4,0);
+		assign(cursor5,0);
+		assign(cursor6,0);
+		assign(cursor7,0);
+		assign(cursor8,0);
+		assign(cursor9,0);
+		assign(cursor10,0);
+		assign(cursor11,0);
+		assign(cursor12,0);
+		assign(cursor13,0);
+		assign(cursor14,0);
+		assign(cursor15,0);
+
+		assign(cursor16,0);
+		assign(cursor17,0);
+		assign(cursor18,0);
+		assign(cursor19,0);
+		assign(cursor20,0);
+		assign(cursor21,0);
+		assign(cursor22,0);
+		assign(cursor23,0);
+		assign(cursor24,0);
+		assign(cursor25,0);
+		assign(cursor26,0);
+		assign(cursor27,0);
+		assign(cursor28,0);
+		assign(cursor29,0);
+		assign(cursor30,0);
+		assign(cursor31,0);
+
+		assign(cursorFont0,0);
+		assign(cursorFont1,0);
+		assign(cursorFont2,0);
+		assign(cursorFont3,0);
+		assign(cursorFont4,0);
+		assign(cursorFont5,0);
+		assign(cursorFont6,0);
+		assign(cursorFont7,0);
+		assign(cursorFont8,0);
+		assign(cursorFont9,0);
+		assign(cursorFont10,0);
+		assign(cursorFont11,0);
+		assign(cursorFont12,0);
+		assign(cursorFont13,0);
+		assign(cursorFont14,0);
+		assign(cursorFont15,0);
+
+		assign(cursorFont16,0);
+		assign(cursorFont17,0);
+		assign(cursorFont18,0);
+		assign(cursorFont19,0);
+		assign(cursorFont20,0);
+		assign(cursorFont21,0);
+		assign(cursorFont22,0);
+		assign(cursorFont23,0);
+		assign(cursorFont24,0);
+		assign(cursorFont25,0);
+		assign(cursorFont26,0);
+		assign(cursorFont27,0);
+		assign(cursorFont28,0);
+		assign(cursorFont29,0);
+		assign(cursorFont30,0);
+		assign(cursorFont31,0);
+
+		//pts(cursor,cursor1);
+		//setc(cursor1,0);
+		//ptg(test,cursor);
+		//setc(test,0);
+
+
+
+
+		kbdDrawCap();
+		//kbdDrawInit();
+		//kbdDrawSymbol();
+		
+
+
+			
+		
+
 		assign(state,4);
 		assign(d,0);
 		while(d<25){
@@ -832,7 +1289,7 @@ func runEchoApp();
 			add(origin, 5898240);
 			drawAppAna();
 			add(origin, 5898240);
-			drawAppCalc();
+			drawAppChat();
 			add(origin, 5898240);
 			drawAppDraw();
 			assign(state,0);
@@ -879,7 +1336,7 @@ func runGpioApp();
 			add(origin, 5898240);
 			drawAppAna();
 			add(origin, 5898240);
-			drawAppCalc();
+			drawAppChat();
 			add(origin, 5898240);
 			drawAppDraw();
 			assign(state,0);
@@ -926,7 +1383,7 @@ func runAnaApp();
 			add(origin, 5898240);
 			drawAppAna();
 			add(origin, 5898240);
-			drawAppCalc();
+			drawAppChat();
 			add(origin, 5898240);
 			drawAppDraw();
 			assign(state,0);
@@ -942,8 +1399,2015 @@ func runAnaApp();
 		}
 	}
 end();
-func runCalcApp();
+
+func kbdPressInit();
+	//q
+	if(x > 0 && x < 48 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,113);
+			//setc(byte,0);
+			assign(cursorFont,font_q);			
+			assign(acted,1);
+		}		
+	}
+	//w
+	if(x > 47 && x < 96 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,119);
+			//setc(byte,0);
+			assign(cursorFont,font_w);			
+			assign(acted,1);
+		}		
+	}
+	//e
+	if(x > 95 && x < 144 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,101);
+			//setc(byte,0);
+			assign(cursorFont,font_e);			
+			assign(acted,1);
+		}		
+	}
+	//r
+	if(x > 144 && x < 192 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,114);
+			//setc(byte,0);
+			assign(cursorFont,font_r);			
+			assign(acted,1);
+		}		
+	}
+	//t
+	if(x > 191 && x < 240 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,116);
+			//setc(byte,0);
+			assign(cursorFont,font_t);			
+			assign(acted,1);
+		}		
+	}
+
+	//y
+	if(x > 239 && x < 288 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,121);
+			//setc(byte,0);
+			assign(cursorFont,font_y);			
+			assign(acted,1);
+		}		
+	}
+	//u
+	if(x > 287 && x < 336 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,117);
+			//setc(byte,0);
+			assign(cursorFont,font_u);			
+			assign(acted,1);
+		}		
+	}
+	//i
+	if(x > 335 && x < 384 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,105);
+			//setc(byte,0);
+			assign(cursorFont,font_i);			
+			assign(acted,1);
+		}		
+	}
+	//o
+	if(x > 383 && x < 432 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,111);
+			//setc(byte,0);
+			assign(cursorFont,font_o);			
+			assign(acted,1);
+		}		
+	}
+	//p
+	if(x > 431 && x < 480 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,112);
+			//setc(byte,0);
+			assign(cursorFont,font_p);			
+			assign(acted,1);
+		}		
+	}
+
+
+	//ROW 2
+	//a
+	if(x > 0 && x < 72 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,97);
+			//setc(byte,0);
+			assign(cursorFont,font_a);			
+			assign(acted,1);
+		}		
+	}
+	//s
+	if(x > 71 && x < 120 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,115);
+			//setc(byte,0);
+			assign(cursorFont,font_s);			
+			assign(acted,1);
+		}		
+	}
+	//d
+	if(x > 119 && x < 168 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,100);
+			//setc(byte,0);
+			assign(cursorFont,font_d);			
+			assign(acted,1);
+		}		
+	}
+	//f
+	if(x > 167 && x < 216 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,102);
+			//setc(byte,0);
+			assign(cursorFont,font_f);			
+			assign(acted,1);
+		}		
+	}
+	//g
+	if(x > 215 && x < 264 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,103);
+			//setc(byte,0);
+			assign(cursorFont,font_g);			
+			assign(acted,1);
+		}		
+	}
+
+	//h
+	if(x > 263 && x < 312 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,104);
+			//setc(byte,0);
+			assign(cursorFont,font_h);			
+			assign(acted,1);
+		}		
+	}
+	//j
+	if(x > 311 && x < 360 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,106);
+			//setc(byte,0);
+			assign(cursorFont,font_j);			
+			assign(acted,1);
+		}		
+	}
+	//k
+	if(x > 359 && x < 408 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,107);
+			//setc(byte,0);
+			assign(cursorFont,font_k);			
+			assign(acted,1);
+		}		
+	}
+	//l
+	if(x > 407 && x < 480 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,108);
+			//setc(byte,0);
+			assign(cursorFont,font_l);			
+			assign(acted,1);
+		}		
+	}
+
+
+	//ROW 3
+	//shift
+	if(x > 0 && x < 72 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,14);
+			//setc(byte,0);
+			assign(kbdState,0);
+			kbdDrawCap();
+			
+
+			assign(acted,1);
+		}		
+	}
+	//z
+	if(x > 71 && x < 120 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,122);
+			//setc(byte,0);
+			assign(cursorFont,font_z);			
+			assign(acted,1);
+		}		
+	}
+	//x
+	if(x > 119 && x < 168 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,120);
+			//setc(byte,0);
+			assign(cursorFont,font_x);			
+			assign(acted,1);
+		}		
+	}
+	//c
+	if(x > 167 && x < 216 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,99);
+			//setc(byte,0);
+			assign(cursorFont,font_c);			
+			assign(acted,1);
+		}		
+	}
+	//v
+	if(x > 215 && x < 264 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,118);
+			//setc(byte,0);
+			assign(cursorFont,font_v);			
+			assign(acted,1);
+		}		
+	}
+
+	//b
+	if(x > 263 && x < 312 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,98);
+			//setc(byte,0);
+			assign(cursorFont,font_b);			
+			assign(acted,1);
+		}		
+	}
+	//n
+	if(x > 311 && x < 360 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,110);
+			//setc(byte,0);
+			assign(cursorFont,font_n);			
+			assign(acted,1);
+		}		
+	}
+	//m
+	if(x > 359 && x < 408 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,109);
+			//setc(byte,0);
+			assign(cursorFont,font_m);			
+			assign(acted,1);
+		}		
+	}
+	//backspace
+	if(x > 407 && x < 480 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,8);
+			//setc(byte,0);
+			assign(acted,1);
+		}		
+	}
+
+	//ROW 4
+	//num
+	if(x > 0 && x < 72 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,31);
+			//setc(byte,0);
+			assign(kbdState,2);
+			
+			kbdDrawSymbol();
+			assign(acted,1);
+		}		
+	}
+	//bslash
+	if(x > 71 && x < 120 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,92);
+			//setc(byte,0);
+			assign(cursorFont,font_bSlash);			
+			assign(acted,1);
+		}		
+	}
+	//SPACE
+	if(x > 119 && x < 360 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,32);
+			//setc(byte,0);
+			assign(cursorFont,0);			
+			assign(acted,1);
+		}		
+	}
+	
+	//.
+	if(x > 359 && x < 408 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,46);
+			//setc(byte,0);
+			assign(cursorFont,font_dot);			
+			assign(acted,1);
+		}		
+	}
+	//enter
+	if(x > 407 && x < 480 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,13);
+			//setc(byte,0);
+			assign(acted,1);
+		}		
+	}
+
+
+
+	
+	
+end();
+
+func kbdPressSymbol();
+	//1
+	if(x > 0 && x < 48 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,49);
+			//setc(byte,0);
+			assign(cursorFont,font_1);			
+			assign(acted,1);
+		}		
+	}
+	//2
+	if(x > 47 && x < 96 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,50);
+			//setc(byte,0);
+			assign(cursorFont,font_2);			
+			assign(acted,1);
+		}		
+	}
+	//3
+	if(x > 95 && x < 144 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,51);
+			//setc(byte,0);
+			assign(cursorFont,font_3);			
+			assign(acted,1);
+		}		
+	}
+	//4
+	if(x > 144 && x < 192 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,52);
+			//setc(byte,0);
+			assign(cursorFont,font_4);			
+			assign(acted,1);
+		}		
+	}
+	//5
+	if(x > 191 && x < 240 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,53);
+			//setc(byte,0);
+			assign(cursorFont,font_5);			
+			assign(acted,1);
+		}		
+	}
+
+	//6
+	if(x > 239 && x < 288 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,54);
+			//setc(byte,0);
+			assign(cursorFont,font_6);			
+			assign(acted,1);
+		}		
+	}
+	//7
+	if(x > 287 && x < 336 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,55);
+			//setc(byte,0);
+			assign(cursorFont,font_7);			
+			assign(acted,1);
+		}		
+	}
+	//8
+	if(x > 335 && x < 384 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,56);
+			//setc(byte,0);
+			assign(cursorFont,font_8);			
+			assign(acted,1);
+		}		
+	}
+	//9
+	if(x > 383 && x < 432 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,57);
+			//setc(byte,0);
+			assign(cursorFont,font_9);			
+			assign(acted,1);
+		}		
+	}
+	//0
+	if(x > 431 && x < 480 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,48);
+			//setc(byte,0);
+			assign(cursorFont,font_0);			
+			assign(acted,1);
+		}		
+	}
+
+
+	//ROW 2
+	//@
+	if(x > 0 && x < 72 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,64);
+			//setc(byte,0);
+			assign(cursorFont,font_at);			
+			assign(acted,1);
+		}		
+	}
+	//#
+	if(x > 71 && x < 120 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,35);
+			//setc(byte,0);
+			assign(cursorFont,font_pound);			
+			assign(acted,1);
+		}		
+	}
+	//$
+	if(x > 119 && x < 168 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,36);
+			//setc(byte,0);
+			assign(cursorFont,font_dollar);			
+			assign(acted,1);
+		}		
+	}
+	//_
+	if(x > 167 && x < 216 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,95);
+			//setc(byte,0);
+			assign(cursorFont,font_uscore);			
+			assign(acted,1);
+		}		
+	}
+	//&
+	if(x > 215 && x < 264 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,38);
+			//setc(byte,0);
+			assign(cursorFont,font_and);			
+			assign(acted,1);
+		}		
+	}
+
+	//-
+	if(x > 263 && x < 312 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,45);
+			//setc(byte,0);
+			assign(cursorFont,font_minus);			
+			assign(acted,1);
+		}		
+	}
+	//+
+	if(x > 311 && x < 360 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,43);
+			//setc(byte,0);
+			assign(cursorFont,font_plus);			
+			assign(acted,1);
+		}		
+	}
+	//(
+	if(x > 359 && x < 408 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,40);
+			//setc(byte,0);
+			assign(cursorFont,font_lParent);			
+			assign(acted,1);
+		}		
+	}
+	//)
+	if(x > 407 && x < 480 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,41);
+			//setc(byte,0);
+			assign(cursorFont,font_rParent);			
+			assign(acted,1);
+		}		
+	}
+
+
+	//ROW 3
+	//shift
+	if(x > 0 && x < 72 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,14);
+			//setc(byte,0);
+			assign(kbdState,1);
+			kbdDrawInit();
+
+			assign(acted,1);
+		}		
+	}
+	//'
+	if(x > 71 && x < 120 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,39);
+			//setc(byte,0);
+			assign(cursorFont,font_sQuote);			
+			assign(acted,1);
+		}		
+	}
+	//"
+	if(x > 119 && x < 168 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,34);
+			//setc(byte,0);
+			assign(cursorFont,font_dQuote);			
+			assign(acted,1);
+		}		
+	}
+	// /
+	if(x > 167 && x < 216 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,47);
+			//setc(byte,0);
+			assign(cursorFont,font_slash);			
+			assign(acted,1);
+		}		
+	}
+	//:
+	if(x > 215 && x < 264 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,58);
+			//setc(byte,0);
+			assign(cursorFont,font_colon);			
+			assign(acted,1);
+		}		
+	}
+
+	//;
+	if(x > 263 && x < 312 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,59);
+			//setc(byte,0);
+			assign(cursorFont,font_scolon);			
+			assign(acted,1);
+		}		
+	}
+	//!
+	if(x > 311 && x < 360 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,33);
+			//setc(byte,0);
+			assign(cursorFont,font_exclam);			
+			assign(acted,1);
+		}		
+	}
+	//?
+	if(x > 359 && x < 408 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,63);
+			//setc(byte,0);
+			assign(cursorFont,font_qMark);			
+			assign(acted,1);
+		}		
+	}
+	//backspace
+	if(x > 407 && x < 480 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,8);
+			//setc(byte,0);
+			assign(acted,1);
+		}		
+	}
+
+	//ROW 4
+	//num
+	if(x > 0 && x < 72 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,31);
+			//setc(byte,0);
+			assign(kbdState,0);
+			kbdDrawCap();
+			assign(acted,1);
+		}		
+	}
+	//,
+	if(x > 71 && x < 120 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,44);
+			//setc(byte,0);
+			assign(cursorFont,font_comma);			
+			assign(acted,1);
+		}		
+	}
+	//SPACE
+	if(x > 119 && x < 360 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,32);
+			//setc(byte,0);
+			assign(cursorFont,0);			
+			assign(acted,1);
+		}		
+	}
+	
+	//=
+	if(x > 359 && x < 408 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,61);
+			//setc(byte,0);
+			assign(cursorFont,font_equal);			
+			assign(acted,1);
+		}		
+	}
+	//enter
+	if(x > 407 && x < 480 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,13);
+			//setc(byte,0);
+			assign(acted,1);
+		}		
+	}
+
+
+	
+	
+end();
+
+func kbdPressCap();
+	//Q
+	if(x > 0 && x < 48 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,81);
+			//setc(byte,0);
+			assign(cursorFont,font_Q);
+			assign(acted,1);
+		}		
+	}
+	//W
+	if(x > 47 && x < 96 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,87);
+			//setc(byte,0);
+			assign(cursorFont,font_W);			
+			assign(acted,1);
+		}		
+	}
+	//E
+	if(x > 95 && x < 144 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,69);
+			//setc(byte,0);
+			assign(cursorFont,font_E);			
+			assign(acted,1);
+		}		
+	}
+	//R
+	if(x > 144 && x < 192 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,82);
+			//setc(byte,0);
+			assign(cursorFont,font_R);			
+			assign(acted,1);
+		}		
+	}
+	//T
+	if(x > 191 && x < 240 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,84);
+			//setc(byte,0);
+			assign(cursorFont,font_T);			
+			assign(acted,1);
+		}		
+	}
+
+	//Y
+	if(x > 239 && x < 288 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,89);
+			//setc(byte,0);
+			assign(cursorFont,font_Y);			
+			assign(acted,1);
+		}		
+	}
+	//U
+	if(x > 287 && x < 336 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,85);
+			//setc(byte,0);
+			assign(cursorFont,font_U);			
+			assign(acted,1);
+		}		
+	}
+	//I
+	if(x > 335 && x < 384 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,73);
+			//setc(byte,0);
+			assign(cursorFont,font_I);			
+			assign(acted,1);
+		}		
+	}
+	//O
+	if(x > 383 && x < 432 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,79);
+			//setc(byte,0);
+			assign(cursorFont,font_O);			
+			assign(acted,1);
+		}		
+	}
+	//P
+	if(x > 431 && x < 480 && y > 576 && y < 624){
+		if(acted == 0){
+			assign(byte,80);
+			//setc(byte,0);
+			assign(cursorFont,font_P);			
+			assign(acted,1);
+		}		
+	}
+
+
+	//ROW 2
+	//A
+	if(x > 0 && x < 72 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,65);
+			//setc(byte,0);
+			assign(cursorFont,font_A);			
+			assign(acted,1);
+		}		
+	}
+	//S
+	if(x > 71 && x < 120 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,83);
+			//setc(byte,0);
+			assign(cursorFont,font_S);			
+			assign(acted,1);
+		}		
+	}
+	//D
+	if(x > 119 && x < 168 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,68);
+			//setc(byte,0);
+			assign(cursorFont,font_D);			
+			assign(acted,1);
+		}		
+	}
+	//F
+	if(x > 167 && x < 216 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,70);
+			//setc(byte,0);
+			assign(cursorFont,font_F);			
+			assign(acted,1);
+		}		
+	}
+	//G
+	if(x > 215 && x < 264 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,71);
+			//setc(byte,0);
+			assign(cursorFont,font_G);			
+			assign(acted,1);
+		}		
+	}
+
+	//H
+	if(x > 263 && x < 312 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,72);
+			//setc(byte,0);
+			assign(cursorFont,font_H);			
+			assign(acted,1);
+		}		
+	}
+	//J
+	if(x > 311 && x < 360 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,74);
+			//setc(byte,0);
+			assign(cursorFont,font_J);			
+			assign(acted,1);
+		}		
+	}
+	//K
+	if(x > 359 && x < 408 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,75);
+			//setc(byte,0);
+			assign(cursorFont,font_K);			
+			assign(acted,1);
+		}		
+	}
+	//L
+	if(x > 407 && x < 480 && y > 623 && y < 672){
+		if(acted == 0){
+			assign(byte,76);
+			//setc(byte,0);
+			assign(cursorFont,font_L);			
+			assign(acted,1);
+		}		
+	}
+
+
+	//ROW 3
+	//shift
+	if(x > 0 && x < 72 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,14);
+			//setc(byte,0);
+			assign(kbdState,1);
+			kbdDrawInit();
+
+			assign(acted,1);
+		}		
+	}
+	//Z
+	if(x > 71 && x < 120 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,90);
+			//setc(byte,0);
+			assign(cursorFont,font_Z);			
+			assign(acted,1);
+		}		
+	}
+	//X
+	if(x > 119 && x < 168 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,88);
+			//setc(byte,0);
+			assign(cursorFont,font_X);			
+			assign(acted,1);
+		}		
+	}
+	//C
+	if(x > 167 && x < 216 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,67);
+			//setc(byte,0);
+			assign(cursorFont,font_C);			
+			assign(acted,1);
+		}		
+	}
+	//V
+	if(x > 215 && x < 264 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,86);
+			//setc(byte,0);
+			assign(cursorFont,font_V);			
+			assign(acted,1);
+		}		
+	}
+
+	//B
+	if(x > 263 && x < 312 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,66);
+			//setc(byte,0);
+			assign(cursorFont,font_B);			
+			assign(acted,1);
+		}		
+	}
+	//N
+	if(x > 311 && x < 360 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,78);
+			//setc(byte,0);
+			assign(cursorFont,font_N);			
+			assign(acted,1);
+		}		
+	}
+	//M
+	if(x > 359 && x < 408 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,77);
+			//setc(byte,0);
+			assign(cursorFont,font_M);			
+			assign(acted,1);
+		}		
+	}
+	//backspace
+	if(x > 407 && x < 480 && y > 671 && y < 720){
+		if(acted == 0){
+			assign(byte,8);
+			//setc(byte,0);
+			assign(acted,1);
+		}		
+	}
+
+	//ROW 4
+	//num
+	if(x > 0 && x < 72 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,31);
+			//setc(byte,0);
+			assign(kbdState,2);
+			kbdDrawSymbol();
+			assign(acted,1);
+		}		
+	}
+	//bslash
+	if(x > 71 && x < 120 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,92);
+			//setc(byte,0);
+			assign(cursorFont,font_bSlash);			
+			assign(acted,1);
+		}		
+	}
+	//SPACE
+	if(x > 119 && x < 360 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,32);
+			//setc(byte,0);
+			assign(cursorFont,0);			
+			assign(acted,1);
+		}		
+	}
+	
+	//.
+	if(x > 359 && x < 408 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,46);
+			//setc(byte,0);
+			assign(cursorFont,font_dot);			
+			assign(acted,1);
+		}		
+	}
+	//enter
+	if(x > 407 && x < 480 && y > 719 && y < 800){
+		if(acted == 0){
+			assign(byte,13);
+			//setc(byte,0);
+			assign(acted,1);
+		}		
+	}
+end();
+
+func displayCursorArea();
+	//assign cursorRow cursorCol to pos
+	assign(drawFontX,cursorRow);
+	assign(drawFontY,cursorCol);
+	assign(drawFontCurr,cursorArea);
+	mul(drawFontX,16);
+	mul(drawFontY,16);
+	add(drawFontY,140);
+	drawFont();
+end();
+
+func updateCursorArea();
+	if(cursorRow != 29){
+		add(cursorRow,1);
+	}
+	if(cursorRow == 29){
+		assign(cursorRow,0);
+		if(cursorCol != 24){
+			add(cursorCol,1);
+		}
+		if(cursorCol == 24){
+			assign(cursorCol,0);
+		}
+	}
+end();
+
+func updateCursorAreaNextLine();
+	
+	assign(cursorRow,0);
+	if(cursorCol != 24){
+		add(cursorCol,1);
+	}
+	if(cursorCol == 24){
+		assign(cursorCol,0);
+	}
+	
+end();
+
+func kbdDisplayBar();
+		//process here ,no shift, no num
+		assign(cursorBaked,0);
+
+		if(acted == 1 && byte != 14 && byte != 31){
+			//backspace
+			if(byte == 8 && cursor == 1 && cursorBaked == 0){
+				assign(cursor0,0);
+				assign(cursorFont0,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 2 && cursorBaked == 0){
+				assign(cursor1,0);
+				assign(cursorFont1,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 3 && cursorBaked == 0){
+				assign(cursor2,0);
+				assign(cursorFont2,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 4 && cursorBaked == 0){
+				assign(cursor3,0);
+				assign(cursorFont3,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 5 && cursorBaked == 0){
+				assign(cursor4,0);
+				assign(cursorFont4,0);
+				sub(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 6 && cursorBaked == 0){
+				assign(cursor5,0);
+				assign(cursorFont5,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 7 && cursorBaked == 0){
+				assign(cursor6,0);
+				assign(cursorFont6,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 8 && cursorBaked == 0){
+				assign(cursor7,0);
+				assign(cursorFont7,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 9 && cursorBaked == 0){
+				assign(cursor8,0);
+				assign(cursorFont8,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 10 && cursorBaked == 0){
+				assign(cursor9,0);
+				assign(cursorFont9,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 11 && cursorBaked == 0){
+				assign(cursor10,0);
+				assign(cursorFont10,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 12 && cursorBaked == 0){
+				assign(cursor11,0);
+				assign(cursorFont11,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 13 && cursorBaked == 0){
+				assign(cursor12,0);
+				assign(cursorFont12,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 14 && cursorBaked == 0){
+				assign(cursor13,0);
+				assign(cursorFont13,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 15 && cursorBaked == 0){
+				assign(cursor14,0);
+				assign(cursorFont14,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 16 && cursorBaked == 0){
+				assign(cursor15,0);
+				assign(cursorFont15,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 17 && cursorBaked == 0){
+				assign(cursor16,0);
+				assign(cursorFont16,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 18 && cursorBaked == 0){
+				assign(cursor17,0);
+				assign(cursorFont17,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 19 && cursorBaked == 0){
+				assign(cursor18,0);
+				assign(cursorFont18,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 20 && cursorBaked == 0){
+				assign(cursor19,0);
+				assign(cursorFont19,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 21 && cursorBaked == 0){
+				assign(cursor20,0);
+				assign(cursorFont20,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 22 && cursorBaked == 0){
+				assign(cursor21,0);
+				assign(cursorFont21,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 23 && cursorBaked == 0){
+				assign(cursor22,0);
+				assign(cursorFont22,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 24 && cursorBaked == 0){
+				assign(cursor23,0);
+				assign(cursorFont23,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 25 && cursorBaked == 0){
+				assign(cursor24,0);
+				assign(cursorFont24,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 26 && cursorBaked == 0){
+				assign(cursor25,0);
+				assign(cursorFont25,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 27 && cursorBaked == 0){
+				assign(cursor26,0);
+				assign(cursorFont26,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 28 && cursorBaked == 0){
+				assign(cursor27,0);
+				assign(cursorFont27,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 29 && cursor29 == 0 && cursorBaked == 0){
+				assign(cursor28,0);
+				assign(cursorFont28,0);
+				sub(cursor,1);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+
+				assign(cursorBaked,1);
+			}
+			if(byte == 8 && cursor == 29 && cursor29 != 0 && cursorBaked == 0){
+				assign(cursor29,0);
+				assign(cursorFont29,0);
+
+				assign(drawFontX,cursor);
+				mul(drawFontX,16);
+				cleanFont();
+				
+				assign(cursorBaked,1);
+			}
+
+
+
+			//enter
+			if(byte == 13 && cursor != 0 && cursorBaked == 0){
+				assign(cursor,0);
+				//send everything include \r\n
+				if(cursor0 != 0){
+					updateCursorAreaNextLine();
+					mul(cursor0,256);
+					setc(cursor0,1);
+					assign(cursorArea,cursorFont0);
+					displayCursorArea();
+					updateCursorArea();
+
+					assign(cursorFont0,0);
+					assign(cursor0,0);
+				}
+				if(cursor1 != 0){
+					mul(cursor1,256);
+					setc(cursor1,1);
+					assign(cursorArea,cursorFont1);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont1,0);
+					assign(cursor1,0);
+				}
+				if(cursor2 != 0){
+					mul(cursor2,256);
+					setc(cursor2,1);
+					assign(cursorArea,cursorFont2);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont2,0);
+					assign(cursor2,0);
+				}
+				if(cursor3 != 0){
+					mul(cursor3,256);
+					setc(cursor3,1);
+					assign(cursorArea,cursorFont3);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont3,0);
+					assign(cursor3,0);
+				}
+				if(cursor4 != 0){
+					mul(cursor4,256);
+					setc(cursor4,1);
+					assign(cursorArea,cursorFont4);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont4,0);
+					assign(cursor4,0);
+				}
+				if(cursor5 != 0){
+					mul(cursor5,256);
+					setc(cursor5,1);
+					assign(cursorArea,cursorFont5);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont5,0);
+					assign(cursor5,0);
+				}
+				if(cursor6 != 0){
+					mul(cursor6,256);
+					setc(cursor6,1);
+					assign(cursorArea,cursorFont6);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont6,0);
+					assign(cursor6,0);
+				}
+				if(cursor7 != 0){
+					mul(cursor7,256);
+					setc(cursor7,1);
+					assign(cursorArea,cursorFont7);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont7,0);
+					assign(cursor7,0);
+				}
+				if(cursor8 != 0){
+					mul(cursor8,256);
+					setc(cursor8,1);
+					assign(cursorArea,cursorFont8);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont8,0);
+					assign(cursor8,0);
+				}
+				if(cursor9 != 0){
+					mul(cursor9,256);
+					setc(cursor9,1);
+					assign(cursorArea,cursorFont9);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont9,0);
+					assign(cursor9,0);
+				}
+				if(cursor10 != 0){
+					mul(cursor10,256);
+					setc(cursor10,1);
+					assign(cursorArea,cursorFont10);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont10,0);
+					assign(cursor10,0);
+				}
+				if(cursor11 != 0){
+					mul(cursor11,256);
+					setc(cursor11,1);
+					assign(cursorArea,cursorFont11);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont11,0);
+					assign(cursor11,0);
+				}
+				if(cursor12 != 0){
+					mul(cursor12,256);
+					setc(cursor12,1);
+					assign(cursorArea,cursorFont12);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont12,0);
+					assign(cursor12,0);
+				}
+				if(cursor13 != 0){
+					mul(cursor13,256);
+					setc(cursor13,1);
+					assign(cursorArea,cursorFont13);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont13,0);
+					assign(cursor13,0);
+				}
+				if(cursor14 != 0){
+					mul(cursor14,256);
+					setc(cursor14,1);
+					assign(cursorArea,cursorFont14);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont14,0);
+					assign(cursor14,0);
+				}
+				if(cursor15 != 0){
+					mul(cursor15,256);
+					setc(cursor15,1);
+					assign(cursorArea,cursorFont15);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont15,0);
+					assign(cursor15,0);
+				}
+
+				if(cursor16 != 0){
+					mul(cursor16,256);
+					setc(cursor16,1);
+					assign(cursorArea,cursorFont16);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont16,0);
+					assign(cursor16,0);
+				}
+				if(cursor17 != 0){
+					mul(cursor17,256);
+					setc(cursor17,1);
+					assign(cursorArea,cursorFont17);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont17,0);
+					assign(cursor17,0);
+				}
+				if(cursor18 != 0){
+					mul(cursor18,256);
+					setc(cursor18,1);
+					assign(cursorArea,cursorFont18);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont18,0);
+					assign(cursor18,0);
+				}
+				if(cursor19 != 0){
+					mul(cursor19,256);
+					setc(cursor19,1);
+					assign(cursorArea,cursorFont19);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont19,0);
+					assign(cursor19,0);
+				}
+				if(cursor20 != 0){
+					mul(cursor20,256);
+					setc(cursor20,1);
+					assign(cursorArea,cursorFont20);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont20,0);
+					assign(cursor20,0);
+				}
+				if(cursor21 != 0){
+					mul(cursor21,256);
+					setc(cursor21,1);
+					assign(cursorArea,cursorFont21);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont21,0);
+					assign(cursor21,0);
+				}
+				if(cursor22 != 0){
+					mul(cursor22,256);
+					setc(cursor22,1);
+					assign(cursorArea,cursorFont22);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont22,0);
+					assign(cursor22,0);
+				}
+				if(cursor23 != 0){
+					mul(cursor23,256);
+					setc(cursor23,1);
+					assign(cursorArea,cursorFont23);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont23,0);
+					assign(cursor23,0);
+				}
+				if(cursor24 != 0){
+					mul(cursor24,256);
+					setc(cursor24,1);
+					assign(cursorArea,cursorFont24);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont24,0);
+					assign(cursor24,0);
+				}
+				if(cursor25 != 0){
+					mul(cursor25,256);
+					setc(cursor25,1);
+					assign(cursorArea,cursorFont25);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont25,0);
+					assign(cursor25,0);
+				}
+				if(cursor26 != 0){
+					mul(cursor26,256);
+					setc(cursor26,1);
+					assign(cursorArea,cursorFont26);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont26,0);
+					assign(cursor26,0);
+				}
+				if(cursor27 != 0){
+					mul(cursor27,256);
+					setc(cursor27,1);
+					assign(cursorArea,cursorFont27);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont27,0);
+					assign(cursor27,0);
+				}
+				if(cursor28 != 0){
+					mul(cursor28,256);
+					setc(cursor28,1);
+					assign(cursorArea,cursorFont28);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont28,0);
+					assign(cursor28,0);
+				}
+				if(cursor29 != 0){
+					mul(cursor29,256);
+					setc(cursor29,1);
+					assign(cursorArea,cursorFont29);
+					displayCursorArea();
+					updateCursorArea();
+					assign(cursorFont29,0);
+					assign(cursor29,0);
+				}
+
+				//setc(13,0);//\r
+				//setc(10,0);//\n
+				setc(3328,1);//\r
+				setc(2560,1);//\n
+				updateCursorAreaNextLine();
+				cleanBar();
+				assign(cursorBaked,1);
+			}
+			assign(drawFontY,550);
+			if(cursor == 29 && cursorBaked == 0){
+				assign(cursor29,byte)
+				assign(cursorFont29,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				assign(cursorBaked,1);
+			}
+
+			if(cursor == 28 && cursorBaked == 0){
+				assign(cursor28,byte)
+				assign(cursorFont28,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 27 && cursorBaked == 0){
+				assign(cursor27,byte)
+				assign(cursorFont27,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 26 && cursorBaked == 0){
+				assign(cursor26,byte)
+				assign(cursorFont26,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 25 && cursorBaked == 0){
+				assign(cursor25,byte)
+				assign(cursorFont25,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 24 && cursorBaked == 0){
+				assign(cursor24,byte)
+				assign(cursorFont24,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 23 && cursorBaked == 0){
+				assign(cursor23,byte)
+				assign(cursorFont23,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 22 && cursorBaked == 0){
+				assign(cursor22,byte)
+				assign(cursorFont22,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 21 && cursorBaked == 0){
+				assign(cursor21,byte)
+				assign(cursorFont21,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 20 && cursorBaked == 0){
+				assign(cursor20,byte)
+				assign(cursorFont20,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 19 && cursorBaked == 0){
+				assign(cursor19,byte)
+				assign(cursorFont19,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 18 && cursorBaked == 0){
+				assign(cursor18,byte)
+				assign(cursorFont18,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 17 && cursorBaked == 0){
+				assign(cursor17,byte)
+				assign(cursorFont17,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 16 && cursorBaked == 0){
+				assign(cursor16,byte)
+				assign(cursorFont16,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 15 && cursorBaked == 0){
+				assign(cursor15,byte)
+				assign(cursorFont15,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+
+
+			if(cursor == 14 && cursorBaked == 0){
+				assign(cursor14,byte)
+				assign(cursorFont14,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 13 && cursorBaked == 0){
+				assign(cursor13,byte)
+				assign(cursorFont13,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 12 && cursorBaked == 0){
+				assign(cursor12,byte)
+				assign(cursorFont12,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 11 && cursorBaked == 0){
+				assign(cursor11,byte)
+				assign(cursorFont11,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 10 && cursorBaked == 0){
+				assign(cursor10,byte)
+				assign(cursorFont10,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 9 && cursorBaked == 0){
+				assign(cursor9,byte)
+				assign(cursorFont9,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 8 && cursorBaked == 0){
+				assign(cursor8,byte)
+				assign(cursorFont8,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 7 && cursorBaked == 0){
+				assign(cursor7,byte)
+				assign(cursorFont7,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 6 && cursorBaked == 0){
+				assign(cursor6,byte)
+				assign(cursorFont6,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 5 && cursorBaked == 0){
+				assign(cursor5,byte)
+				assign(cursorFont5,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 4 && cursorBaked == 0){
+				assign(cursor4,byte)
+				assign(cursorFont4,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 3 && cursorBaked == 0){
+				assign(cursor3,byte)
+				assign(cursorFont3,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 2 && cursorBaked == 0){
+				assign(cursor2,byte)
+				assign(cursorFont2,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 1 && cursorBaked == 0){
+				assign(cursor1,byte)
+				assign(cursorFont1,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+			if(cursor == 0 && cursorBaked == 0){
+				assign(cursor0,byte)
+				assign(cursorFont0,cursorFont);
+				if(cursorFont != 0){
+					assign(drawFontCurr,cursorFont);
+					assign(drawFontX,cursor);
+					mul(drawFontX,16);
+					drawFont();
+				}
+				add(cursor,1);
+				assign(cursorBaked,1);
+			}
+
+			
+
+
+		}
+end();
+
+func runAppChat();
 	if(state == 4 && acted == 0){
+		// assign(mix,x);
+		// mul(mix,65536);
+		// add(mix,y);
+		// assign(a,491520);
+		// drb(a,mix,c);
+		
+
+		if(kbdState == 0){ 
+			kbdPressCap();
+		}
+		if(kbdState == 1){
+			kbdPressInit();
+		}
+		if(kbdState == 2){
+			kbdPressSymbol();
+		}
+
+		kbdDisplayBar();
+		
+		
+
+
+
+
+
+		
+		
+
+
 		if(x > 26 && x < 94 && y > 42 && y < 110){
 			cleanScreen();
 			assign(drawFontCurr,font_k);
@@ -973,7 +3437,7 @@ func runCalcApp();
 			add(origin, 5898240);
 			drawAppAna();
 			add(origin, 5898240);
-			drawAppCalc();
+			drawAppChat();
 			add(origin, 5898240);
 			drawAppDraw();
 			assign(state,0);
@@ -987,6 +3451,8 @@ func runCalcApp();
 			}	
 			assign(acted,1);
 		}
+
+
 	}		
 end();
 func runAppDraw();
@@ -1025,7 +3491,7 @@ func runAppDraw();
 			add(origin, 5898240);
 			drawAppAna();
 			add(origin, 5898240);
-			drawAppCalc();
+			drawAppChat();
 			add(origin, 5898240);
 			drawAppDraw();
 			assign(state,0);
